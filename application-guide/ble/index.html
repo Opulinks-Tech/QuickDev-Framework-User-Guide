@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>BluetoothLE - Quick-DEV Programming Guide</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "BluetoothLE";
+        var mkdocs_page_input_path = "application-guide\\ble.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Quick-DEV Programming Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Quick-DEV FWK</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../get_started/get_started/">Get Started</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Application Guide</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../project_config/">Project Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../log_config/">Log Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wifi/">WI-Fi</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">BluetoothLE</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ble-manager">BLE Manager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#initialize">Initialize</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#step-1-enable-ble-manager">Step 1. Enable BLE manager</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step-2-add-related-file-in-keil-project">Step 2. Add related file in Keil project</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step-3-register-callback-and-init">Step 3. Register callback and init</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step-4-setup-advertise-data">Step 4. Setup advertise data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step-5-setup-scan-response-data">Step 5. Setup scan response data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step-6-call-set-adv-data-scan-rsp-data-after-init">Step 6. Call set adv data &amp; scan rsp data after init</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unsolicited-callback">Unsolicited callback</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#register-service">Register service</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to">How To...</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ble-manager_1">BLE Manager</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#how-to-create-ble-service">How to create BLE service</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#how-to-receivenotify-data-via-ble">How to receive/notify data via BLE</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#how-to-perform-ble-process">How to perform BLE process</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wifi_provision_via_ble/">WI-FI Provision Via BLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cloud/">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ota/">OTA</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/wifi_example/">WI-FI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/ble_example/">BLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/qd_app_example/">START_UP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/cloud_example/">Cloud</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/wifi_apis/">WI-FI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ble_apis/">BluetoothLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/cloud_apis/">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ota_apis/">OTA</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Quick-DEV Programming Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>Application Guide &raquo;</li><li>BluetoothLE</li>
+    <li class="wy-breadcrumbs-aside">
+        <a href="https://github.com/kacj1234j/Doc_Test/edit/master/docs/application-guide/ble.md"
+          class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="bluetoothle">BluetoothLE</h1>
+<h2 id="ble-manager">BLE Manager</h2>
+<p>BLE manager provide the auto-advertise option and handling the BLE status that make user eaiser to control BLE statment.</p>
+<h3 id="initialize">Initialize</h3>
+<p>Before using the BLE manager, please follow below steps to initiate.</p>
+<h4 id="step-1-enable-ble-manager">Step 1. Enable BLE manager</h4>
+<pre><code class="language-c">#define BM_ENABLED                               (1)
+</code></pre>
+<p>The definition been defined in <code>qd_module.h</code> in sys_config folder.</p>
+<h4 id="step-2-add-related-file-in-keil-project">Step 2. Add related file in Keil project</h4>
+<p><img alt="ble_mngr_keil_file" src="../img/ble_mngr_keil_file.png" /></p>
+<h4 id="step-3-register-callback-and-init">Step 3. Register callback and init</h4>
+<p>Add below program in <code>app_main.c</code></p>
+<pre><code class="language-c">void APP_BleUnsolicitedCallback(uint16_t u16EvtType, T_OplErr tEvtRst, uint8_t *pu8Data, uint32_t u32DataLen)
+{
+    switch(u16EvtType)
+    {
+        case USLCTED_CB_EVT_BLE_INIT:
+        {       
+            // ble inited event
+
+            // initialize ble advertise data
+            APP_BleAdvDataInit();
+
+            // initialize ble scan response data
+            APP_BleScanRspDataInit();
+
+            break;
+        }
+        case USLCTED_CB_EVT_BLE_ENT_ADVERTISE:
+        {
+            // enter advertising event
+
+            break;
+        }
+        case USLCTED_CB_EVT_BLE_EXI_ADVERTISE:
+        {
+            // exit advertising event
+
+            break;
+        }
+        case USLCTED_CB_EVT_BLE_CONNECTED:
+        {
+            // ble connected event
+
+            break;
+        }
+        case USLCTED_CB_EVT_BLE_DISCONNECT:
+        {
+            // ble disconnect event
+
+            break;
+        }
+        default:
+        {
+            // should not be here
+
+            break;
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-c">void APP_BleInit(void)
+{
+    // assign unsolicited callback function
+    Opl_Ble_Uslctd_CB_Reg(&amp;APP_BleUnsolicitedCallback);
+
+    // register service
+    GAP_Svc_Init();
+    GATT_Svc_Init();
+
+    // ...register your service here
+
+    // initialize the ble manager (auto-adv)
+    Opl_Ble_Init_Req(true);
+
+    // user implement
+}
+</code></pre>
+<p>The parameter of <code>Opl_Ble_Init_Req()</code> is to enable/disable auto-advertise function.</p>
+<ul>
+<li>If set as true - the auto-advertise will be enabled, and will directly start advertise after ble manager init done. While disconnect from connected state, ble manager will also start advertising, till user calling <code>Opl_Ble_Stop_Req()</code>.</li>
+<li>If set as false - the auto-advertise will be disabled, and will not advertise after ble manager init done.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The <code>APP_BleInit()</code> function create by default in <code>app_main.c</code>,
+it's for developer to fill the ble related init function in it.</p>
+</div>
+<h4 id="step-4-setup-advertise-data">Step 4. Setup advertise data</h4>
+<pre><code class="language-c">void APP_BleAdvDataInit(void)
+{
+    // ble advertise data inititate
+
+    // user modify
+    // *
+
+    uint8_t au8BleAdvertData[];
+
+    // configure your own advertise data
+
+    Opl_Ble_Advertise_Data_Set(au8BleAdvertData, lens);
+
+    // *
+}
+</code></pre>
+<h4 id="step-5-setup-scan-response-data">Step 5. Setup scan response data</h4>
+<p>Create scan response data init function, and modify your wishes data.</p>
+<pre><code class="language-c">void APP_BleScanRspDataInit(void)
+{
+    // ble scan response data inititate
+
+    // user modify
+    // *
+
+    uint8_t au8BleScanRspData[BLE_ADV_SCAN_BUF_SIZE];
+
+    // configure your own scan response data
+
+    if(OPL_OK != Opl_Ble_ScanRsp_Data_Set(au8BleScanRspData, lens))
+    {
+        OPL_LOG_ERRO(APP, &quot;Scan Rsp Data Set Fail&quot;);
+    }
+
+    // *
+}
+</code></pre>
+<h4 id="step-6-call-set-adv-data-scan-rsp-data-after-init">Step 6. Call set adv data &amp; scan rsp data after init</h4>
+<p>Call <code>APP_BleAdvDataInit</code> (created in step 4) and <code>APP_BleScanRspDataInit</code> (created in step 5) after recevied <code>USLCTED_CB_EVT_BLE_INIT</code> event in ble unsolicited callback.</p>
+<pre><code class="language-c">void APP_BleUnsolicitedCallback(uint16_t u16EvtType, T_OplErr tEvtRst, uint8_t *pu8Data, uint32_t u32DataLen)
+{
+    switch(u16EvtType)
+    {
+        case USLCTED_CB_EVT_BLE_INIT:
+        {       
+            // ble inited event
+
+            // initialize ble advertise data
+            APP_BleAdvDataInit();               // &lt;---
+
+            // initialize ble scan response data
+            APP_BleScanRspDataInit();           // &lt;---
+
+            break;
+        }
+</code></pre>
+<h3 id="unsolicited-callback">Unsolicited callback</h3>
+<p>The unsolicited callback will content with ble status and carried the result in each state.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Unsolicited callback prototype located in <code>ble_mngr_api.h</code></p>
+</div>
+<h3 id="register-service">Register service</h3>
+<p>Descript how to create the service file</p>
+<h2 id="how-to">How To...</h2>
+<h3 id="ble-manager_1">BLE Manager</h3>
+<p>The BLE manager should provide a mechanism for user BLE data processing application to register the user (vendor defined) service table. The user data processing application process the data receive from and transmit to the phone App via BLE. Developer could set a file for specific service in <code>quick_dev\ble_services</code></p>
+<h4 id="how-to-create-ble-service">How to create BLE service</h4>
+<ul>
+<li><strong>BLE service initiate</strong> (e.g. Battery Service)</li>
+</ul>
+<pre><code class="language-c">void BAS_Svc_Init(void)
+{
+    g_tBasSvcHandle.patSvcDb = g_BasSvcDb;
+    g_tBasSvcHandle.u8SvcDbSize = BAS_SVC_IDX_TOTAL;
+    g_tBasSvcHandle.ptSvcGattDispatchHandler = BAS_Svc_GattDispatchHandler;
+
+    if(OPL_OK != Opl_Ble_Service_Assign(&amp;g_tBasSvcHandle))
+    {
+        OPL_LOG_ERRO(BAS, &quot;BAS Service assign fail\r\n&quot;);
+    }
+}
+</code></pre>
+<p><code>g_tBasSvcHandle</code> is the BLE service handle structure</p>
+<pre><code class="language-c">static T_BmSvcHandle g_tBasSvcHandle = {0};
+
+typedef struct S_BmSvcHandle
+{
+    LE_GATT_SERVICE_T             *ptSvcDef;
+    LE_GATT_ATTR_T                *patSvcDb;
+    uint8_t                       u8SvcDbSize;
+    uint8_t                       u8Reserved;
+    uint16_t                      u16SvcDataEvtBase;
+    uint16_t                      u16SvcDataEvtTop;
+    T_BmSvcDataProcessHandlerFp   ptSvcDataProcessHandler;
+    T_BmSvcGattDispatchHandlerFp  ptSvcGattDispatchHandler;
+} T_BmSvcHandle;
+
+</code></pre>
+<p>Developer at least should set three parameters <code>*patSvcDb</code>, <code>u8SvcDbSize</code> and <code>ptSvcGattDispatchHandler</code>. <code>*patSvcDb</code> is the service attribute information. <code>u8SvcDbSize</code> is the service size and <code>ptSvcGattDispatchHandler</code> is GATT dispatch handler.</p>
+<pre><code class="language-c">LE_GATT_ATTR_T                *patSvcDb;
+
+typedef struct
+{
+    UINT16                  handle;                    /**&lt; handle */
+    UINT8                   format;                    /**&lt; UUID type */
+    UINT16 * const          pUuid;                     /**&lt; UUID */
+    UINT16                  permit;                    /**&lt; permit */
+    UINT16                  maxLen;                    /**&lt; maxinum value length */
+    UINT16                  len;                       /**&lt; value length */
+    UINT8 * const           pVal;                      /**&lt; value */
+} LE_GATT_ATTR_T;
+</code></pre>
+<p>After configurating the BLE handle structure, developer could register BLE service via BLE Manager. </p>
+<ul>
+<li><strong>Register BLE service via BLE Manager</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Service_Assign(T_BmSvcHandle *ptBmSvcHandle)
+</code></pre>
+<h4 id="how-to-receivenotify-data-via-ble">How to receive/notify data via BLE</h4>
+<p>Developer could create user defined service to implement input/output via BLE. </p>
+<ul>
+<li><strong>Receive data via BLE</strong></li>
+</ul>
+<p>In user defined servcie, developer can use user defined GATT dispatch handler to handle data from LE task. The developer can create different handlers for processing according to the type of data received in user defined GATT dispatch handler.</p>
+<pre><code class="language-c">static T_OplErr UD_Svc_GattDispatchHandler(MESSAGEID tId, MESSAGE tMsg)
+{
+    switch(tId)
+    {
+        case LE_GATT_MSG_ACCESS_READ_IND:
+        {
+            UD_Svc_GattDispatchReadHandler((LE_GATT_MSG_ACCESS_READ_IND_T *)tMsg);
+            break;
+        }
+
+        case LE_GATT_MSG_ACCESS_WRITE_IND:
+        {
+            UD_Svc_GattDispatchWriteHandler((LE_GATT_MSG_ACCESS_WRITE_IND_T *)tMsg);
+            break;
+        }
+
+        case LE_GATT_MSG_NOTIFY_CFM:
+        {
+            OPL_LOG_INFO(UDS, &quot;Notify Confirm&quot;);
+            break;
+        }
+
+        default:
+        {
+            return OPL_ERR_CASE_INVALID;
+        }
+    }
+
+    return OPL_OK;
+}
+</code></pre>
+<p>There are three types of events in user defined handler that incude <code>LE_GATT_MSG_ACCESS_READ_IND</code>, <code>LE_GATT_MSG_ACCESS_WRITE_IND</code> and <code>LE_GATT_MSG_NOTIFY_CFM</code>. Developer could create different handler to handle these events.</p>
+<p>If receiving <code>LE_GATT_MSG_ACCESS_WRITE_IND</code>, developer could create write handler (e.g. <code>UD_Svc_GattDispatchWriteHandler</code>). In this handler, develop <strong>must</strong> response read access to bottom layer via LE <code>LeGattAccessWriteRsp</code>.</p>
+<pre><code class="language-c">static void UD_Svc_GattDispatchWriteHandler(LE_GATT_MSG_ACCESS_WRITE_IND_T *ind)
+{
+    // process the write access activity in each characteristic
+    uint8_t u8AttErr = 0;
+    uint16_t u16AttrId = ind-&gt;handle - g_tUdSvcHandle.ptSvcDef-&gt;startHdl;
+
+    // printf(&quot;UD Svc attId = %d op = %x offset = %d\r\n&quot;, u16AttrId, ind-&gt;flag, ind-&gt;offset);
+
+    switch(u16AttrId)
+    {
+        case UD_SVC_IDX_TX_VAL:
+        {
+            // send message to app
+            APP_SendMessage(APP_EVT_BLE_DATA_IND, ind-&gt;pVal, ind-&gt;len);
+
+            break;
+        }
+
+        case UD_SVC_IDX_RX_CFG:
+        {
+            uint16_t u16Enable = *((uint16_t *)ind-&gt;pVal);
+
+            if ((ind-&gt;len == 2) &amp;&amp; (u16Enable &lt;= 1))
+            {
+                LeGattChangeAttrVal(g_tUdSvcHandle.ptSvcDef, UD_SVC_IDX_RX_CFG, sizeof(u16Enable), &amp;u16Enable);
+            }
+            else
+            {
+                u8AttErr = LE_ATT_ERR_INVALID_ATTR_VALUE_LEN;
+            }
+
+            break;
+        }
+
+        default:
+        {
+            u8AttErr = LE_ATT_ERR_WRITE_NOT_PERMITTED;
+            break;
+        }
+    }
+
+    LeGattAccessWriteRsp(ind-&gt;conn_hdl, ind-&gt;flag, ind-&gt;handle, u8AttErr);
+}
+</code></pre>
+<p>If receiving <code>LE_GATT_MSG_ACCESS_READ_IND</code>, developer could create read handler (e.g. <code>UD_Svc_GattDispatchReadHandler</code>). In this handler, develop <strong>must</strong> response read access to bottom layer via LE <code>LeGattAccessReadRsp</code>. </p>
+<pre><code class="language-c">static void UD_Svc_GattDispatchReadHandler(LE_GATT_MSG_ACCESS_READ_IND_T *ind)
+{
+    // process the read access activity in each characteristic
+    uint8_t u8AttErr = 0;
+    uint16_t u16AttrId = ind-&gt;handle - g_tUdSvcHandle.ptSvcDef-&gt;startHdl;
+
+    // printf(&quot;UD Svc attId = %d op = %x offset = %d\r\n&quot;, u16AttrId, ind-&gt;flag, ind-&gt;offset);
+
+    switch(u16AttrId)
+    {
+        case UD_SVC_IDX_RX_VAL:
+        case UD_SVC_IDX_RX_CFG:
+        {
+            break;
+        }
+
+        default:
+        {
+            u8AttErr = LE_ATT_ERR_READ_NOT_PERMITTED;
+            break;
+        }
+    }
+
+    LeGattAccessReadRsp(ind-&gt;conn_hdl, ind-&gt;handle, u8AttErr);
+}
+</code></pre>
+<ul>
+<li><strong>Notify data via BLE</strong></li>
+</ul>
+<p>If  wanting to actively send messages from application to the host via BLE, developer can create a notify function (e.g. <code>UD_Svc_RxDataOutNotify</code>) in the user defined service. <code>LeGattCharValNotify</code> can send data via LE.</p>
+<pre><code class="language-c">T_OplErr UD_Svc_RxDataOutNotify(uint8_t *pu8Data, uint32_t u32DataLen)
+{
+    LE_ERR_STATE status;
+
+    uint16_t u16NotiAttrId = g_tUdSvcHandle.ptSvcDef-&gt;startHdl + UD_SVC_IDX_RX_VAL;
+
+    // update rx data to attribute value
+    LeGattChangeAttrVal(g_tUdSvcHandle.ptSvcDef, (uint16_t)UD_SVC_IDX_RX_VAL, u32DataLen, pu8Data);
+
+    // notify rx data to host
+    status = LeGattCharValNotify(Opl_Ble_EntityGet()-&gt;conn_hdl, u16NotiAttrId, u32DataLen, pu8Data);
+
+    if (status != SYS_ERR_SUCCESS)
+    {
+        OPL_LOG_ERRO(BAS, &quot;Ble sending data fail&quot;);
+        return OPL_ERR;
+    }
+
+    return OPL_OK;
+}
+</code></pre>
+<h4 id="how-to-perform-ble-process">How to perform BLE process</h4>
+<ul>
+<li><strong>Start BLE advertising</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Start_Req(uint8_t u8AutoAdvEn)
+</code></pre>
+<p>To start BLE advertising, <code>*u8AutoAdvEn</code> is true that enable auto-advertise while disconnect.</p>
+<ul>
+<li><strong>Stop BLE advertisng</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Stop_Req(void)
+</code></pre>
+<ul>
+<li><strong>Set BLE advertise data</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Advertise_Data_Set(uint8_t *pau8AdvData, uint8_t u8AdvDataLen)
+</code></pre>
+<p>If wanting to set BLE advertisement data via BLE Manager, developer could config BLE data <code>*pau8AdvData</code> in <code>Opl_Ble_Advertise_Data_Set</code></p>
+<ul>
+<li><strong>Set BLE scan respnse data</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_ScanRsp_Data_Set(uint8_t *pau8ScanRspData, uint8_t u8ScanRspDataLen)
+</code></pre>
+<p>If BLE central scan, developer could set scan response data in BLE perpherial</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../wifi/" class="btn btn-neutral float-left" title="WI-Fi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../wifi_provision_via_ble/" class="btn btn-neutral float-right" title="WI-FI Provision Via BLE">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright 2022, MaxLiao corporation</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/kacj1234j/Doc_Test" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../wifi/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../wifi_provision_via_ble/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>WI-FI - Quick-DEV Programming Guide</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "WI-FI";
+        var mkdocs_page_input_path = "examples\\wifi_example.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Quick-DEV Programming Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Quick-DEV FWK</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../get_started/get_started/">Get Started</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Application Guide</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/project_config/">Project Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/log_config/">Log Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/wifi/">WI-Fi</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/ble/">BluetoothLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/wifi_provision_via_ble/">WI-FI Provision Via BLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/cloud/">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/ota/">OTA</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">WI-FI</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#wi-fi-scan-connect">Wi-Fi scan connect</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wi-fi-quick-connect">Wi-Fi quick connect</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ble_example/">BLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qd_app_example/">START_UP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../cloud_example/">Cloud</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/wifi_apis/">WI-FI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ble_apis/">BluetoothLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/cloud_apis/">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ota_apis/">OTA</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Quick-DEV Programming Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>Examples &raquo;</li><li>WI-FI</li>
+    <li class="wy-breadcrumbs-aside">
+        <a href="https://github.com/kacj1234j/Doc_Test/edit/master/docs/examples/wifi_example.md"
+          class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="wi-fi-example">Wi-Fi example</h1>
+<p>Wi-Fi example is intended to demonstrate the Wi-Fi functionality, and to provide code that you can copy and adapt into your own projects</p>
+<h2 id="wi-fi-scan-connect">Wi-Fi scan connect</h2>
+<p>Wi-Fi scan connect example is a Wi-Fi process from Wi-Fi scan to Wi-Fi connect. First executing Wi-Fi sacn, scan to the AP in the environment. According to the scanned AP results, execute Wi-Fi connect to one of these APs. This example is in <code>examples\wifi\wifi_scan_connet</code>.</p>
+<p><img alt="Wi-Fi_scan_connect" src="../img/scan_connect.png" /></p>
+<p>After APP_init , It will start systemTimer. After timer timeout , User Application will send Scan request to Network Manager. The Network Manager will call the callback function to notify the User Application Scandone after the Scan is completed. Once the Application receives the callback function, the user can use the Scan result to select the desired wifi connection and send a Connect request to the Network Manager, and the Network Manager will call the callback function to notify the User Application after connection done.</p>
+<h2 id="wi-fi-quick-connect">Wi-Fi quick connect</h2>
+<p>Wi-Fi quick connect is a example to do the fast Wi-Fi setting. The developer can set a default AP information (ssid, password), this example skips some Wi-Fi process (e.g. Wi-Fi scan) and notify the bottom layer to connect to this AP directly. If disconnecting to the default AP, this example will re-connect this AP automatically. This example is in  <code>examples\wifi\wifi_quick_connect</code>.</p>
+<p><img alt="Wi-Fi_quick_connect" src="../img/wifi_quick_connect.png" /></p>
+<p>After APP_init, it will start SystemTimer. After timer timeout, User Application will get default SSID and Password from qd_config. Then Network Manager use the AP information to pass to bottom layer that implement WI-FI scan and Network Manager will clear all old AP recorders for saving this AP information to auto-connect if WI-FI disconnect then Network Manager retrieve the scan result (ex: AP bssid) to pass to bottom layer that could use the AP bssid to implement WI-FI connect. By the way, the AP information could be brought by the third party (MCU).</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../application-guide/ota/" class="btn btn-neutral float-left" title="OTA"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ble_example/" class="btn btn-neutral float-right" title="BLE">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright 2022, MaxLiao corporation</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/kacj1234j/Doc_Test" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../../application-guide/ota/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ble_example/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme_extra.js" defer></script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
