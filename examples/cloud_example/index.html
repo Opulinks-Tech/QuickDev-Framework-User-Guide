@@ -66,15 +66,19 @@
               </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
               <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../wifi_example/">WI-FI</a>
-                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ble_example/">BLE</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../qd_app_example/">START_UP</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Cloud</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#tcp-demo">TCP demo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mqtt-demo">MQTT demo</a>
+    </li>
     </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../qd_app_example/">Start Up</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../wifi_example/">WI-FI</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
@@ -114,8 +118,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="tcp-cloud">TCP Cloud</h1>
-<p>This TCP Cloud Demo is the application utilizes the TCP cloud ported from cloud template so that the OPL device can connect to TCP server. The example application is in <code>\examples\cloud\tcp_demo</code>. The TCP Cloud is in<code>\quick_dev\app_ref\cloud\tcp_cloud</code>. This example is mainly to demonstrate how to connect to the TCP Server after connecting to Wi-Fi.</p>
+                <h1 id="cloud-examples">Cloud examples</h1>
+<h2 id="tcp-demo">TCP demo</h2>
+<p>The tcp_demo example mainly to demonstrate the TCP communication between device and host, also in this example provide the utilize of TCP cloud ported from cloud template and generate a simple application to present the basic control of TCP service. The example located at <code>\examples\cloud\tcp_demo</code>.</p>
 <p>In the beginning of this example, it will connect to Wi-Fi using BLE broadcast, as in QD_APP (see QD_APP for details). This example is mainly to demonstrate how to connect to the TCP Server after connecting to Wi-Fi, and the TCP Server we apply is "SocketTest" (url: http://sockettest.sourceforge.net/). A JAVA environment is necessary to run the "SocketTest" server. After running SocketTest,  press "Start Listening".</p>
 <p><img alt="cloud_1" src="../img/cloud_1.png" /></p>
 <p><strong>1. How to connect and send message to TCP Server</strong></p>
@@ -140,7 +145,7 @@
 <p>After device connected to server and enter Sleep mode, input message in "Send Message" textbox of "SocketTest". Server will send the message to the device. After receiving in device side, the message will display in DBG Console.</p>
 <p><img alt="cloud_13" src="../img/cloud_13.png" /></p>
 <p><img alt="cloud_14" src="../img/cloud_14.png" /></p>
-<h1 id="mqtt-cloud">MQTT Cloud</h1>
+<h2 id="mqtt-demo">MQTT demo</h2>
 <p>This MQTT Cloud Demo is the application utilizes the MQTT cloud ported from cloud template so that the OPL device can connect/subscribe/publish to MQTT server. The example application is in <code>\examples\cloud\mqtt_demo</code>. The MQTT cloud is in <code>\quick_dev\app_ref\cloud\mqtt_cloud</code>. This example is mainly to demonstrate how to connect to the MQTT Server and publish and subscribe Topic after connecting to Wi-Fi.</p>
 <p><img alt="cloud_1" src="../img/mqtt_1.png" /></p>
 <p>The MQTT server (Broker) will hand-over the data from client who published to client who subscribed, it is a center role of MQTT system. And all the clients are connected to same Broker and using topic subscribe/publish mechanism to transmit and receive data. So as the MQTT demo, user will need to install a client on your PC to create a demonstration environment.</p>
@@ -183,8 +188,8 @@ SSL Secure: enable</p>
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../qd_app_example/" class="btn btn-neutral float-left" title="START_UP"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../../api-reference/wifi_apis/" class="btn btn-neutral float-right" title="WI-FI">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ble_example/" class="btn btn-neutral float-left" title="BLE"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../qd_app_example/" class="btn btn-neutral float-right" title="Start Up">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -212,10 +217,10 @@ SSL Secure: enable</p>
         </span>
     
     
-      <span><a href="../qd_app_example/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../ble_example/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../../api-reference/wifi_apis/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../qd_app_example/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
