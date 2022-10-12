@@ -74,6 +74,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/wifi_example/">WI-FI</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/host_mode_example/">Host_Mode</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
               <ul class="current">
@@ -83,9 +85,49 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">Cloud</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#cloud-manager">Cloud Manager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#header-file-">Header File -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#api-list-">API List -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#functions-">Functions -</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_timerstart">Cloud_TimerStart</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_timerstop">Cloud_TimerStop</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_inithandler">Cloud_InitHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_establishhandler">Cloud_EstablishHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_disconnecthandler">Cloud_DisconnectHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_timeouthandler">Cloud_TimeoutHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_bindinghandler">Cloud_BindingHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_keepalivehandler">Cloud_KeepAliveHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_ackhandler">Cloud_AckHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_posthandler">Cloud_PostHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_backupringbufinit">Cloud_BackupRingBufInit</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_postbackuphandler">Cloud_PostBackupHandler</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cloud_receivehandler">Cloud_ReceiveHandler</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ota_apis/">OTA</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../opl_error_code/">OPL Error Code</a>
                   </li>
               </ul>
       </div>
@@ -102,19 +144,363 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>API Reference &raquo;</li><li>Cloud</li>
+          <li>API Reference &raquo;</li>
+      <li>Cloud</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/cloud_apis.md"
-          class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/cloud_apis.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="cloud-api-list">Cloud (API List)</h1>
+                <h1 id="cloud">Cloud</h1>
+<h2 id="cloud-manager">Cloud Manager</h2>
+<h3 id="header-file-">Header File -</h3>
+<p>quick_dev/app_ref/cloud_template/cloud_ctrl.h</p>
+<h3 id="api-list-">API List -</h3>
+<table>
+<thead>
+<tr>
+<th align="left">API Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#cloud_timerstart">Cloud_TimerStart</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_timerstop">Cloud_TimerStop</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_inithandler">Cloud_InitHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_establishhandler">Cloud_EstablishHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_disconnecthandler">Cloud_DisconnectHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_timeouthandler">Cloud_TimeoutHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_bindinghandler">Cloud_BindingHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_keepalivehandler">Cloud_KeepAliveHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_ackhandler">Cloud_AckHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_posthandler">Cloud_PostHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_backupringbufinit">Cloud_BackupRingBufInit</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_postbackuphandler">Cloud_PostBackupHandler</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#cloud_receivehandler">Cloud_ReceiveHandler</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="functions-">Functions -</h3>
+<hr />
+<h6 id="cloud_timerstart">Cloud_TimerStart</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_TimerStart(T_CloudTimerIdx tTmrIdx, uint32_t u32TimeMs);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Start timer function</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;tTmrIdx: timer index</p>
+<p>&emsp;&emsp;u32TimeMs: timer time in ms</p>
+<hr />
+<!-- ###### E_CloudTimerIdx
+
+* **Enumeration Table**
+
+<pre><code class="language-c">typedef enum E_CloudTimerIdx
+{
+    // user implement
+    // *
+    CLOUD_TMR_CONN_RETRY = 0,
+    CLOUD_TMR_KEEP_ALIVE,
+    // *
+
+    CLOUD_TMR_MAX,
+} T_CloudTimerIdx;
+</code></pre>
+
+
+------------------------------------------------------------------------ -->
+<h6 id="cloud_timerstop">Cloud_TimerStop</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_TimerStop(T_CloudTimerIdx tTmrIdx);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Stop timer function</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;tTmrIdx: timer index</p>
+<hr />
+<h6 id="cloud_inithandler">Cloud_InitHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_InitHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Cloud init event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong> </li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_establishhandler">Cloud_EstablishHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_EstablishHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Establish connection event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_disconnecthandler">Cloud_DisconnectHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_DisconnectHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Cloud disconnection event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_timeouthandler">Cloud_TimeoutHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_TimeoutHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Timeout event handler from timer</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_bindinghandler">Cloud_BindingHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_BindingHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Binding request event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_keepalivehandler">Cloud_KeepAliveHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_KeepAliveHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Post keep alive event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_ackhandler">Cloud_AckHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_AckHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Post ack event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_posthandler">Cloud_PostHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_PostHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Post data event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_backupringbufinit">Cloud_BackupRingBufInit</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_BackupRingBufInit(void);
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>CLOUD_TX_DATA_BACKUP_ENABLED must required</p>
+</div>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Init ring buffers (will be called at Cloud_Init())</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<hr />
+<h6 id="cloud_postbackuphandler">Cloud_PostBackupHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_PostBackupHandler(uint32_t u32EventId, void *pData, uint32_t u32DataLen);
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>CLOUD_TX_DATA_BACKUP_ENABLED must required</p>
+</div>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Post the back up data event handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: event ID</p>
+<p>&emsp;&emsp;pData: message data</p>
+<p>&emsp;&emsp;u32DataLen: message data lens</p>
+<hr />
+<h6 id="cloud_receivehandler">Cloud_ReceiveHandler</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Cloud_ReceiveHandler(void);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Received data from cloud handler</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
               
             </div>
           </div><footer>

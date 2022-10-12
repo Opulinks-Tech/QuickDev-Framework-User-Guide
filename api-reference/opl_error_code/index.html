@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>MP - Quick-DEV Programming Guide</title>
+    <title>OPL Error Code - Quick-DEV Programming Guide</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "MP";
-        var mkdocs_page_input_path = "application-guide\\mp.md";
+        var mkdocs_page_name = "OPL Error Code";
+        var mkdocs_page_input_path = "api-reference\\opl_error_code.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -49,19 +49,19 @@
               </ul>
               <p class="caption"><span class="caption-text">Application Guide</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../project_config/">Project Configuration</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/project_config/">Project Configuration</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../log_config/">Log Configuration</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/log_config/">Log Configuration</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wifi/">WI-Fi</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/wifi/">WI-Fi</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ble/">BluetoothLE</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/ble/">BluetoothLE</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../wifi_provision_via_ble/">WI-FI Provision Via BLE</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/wifi_provision_via_ble/">WI-FI Provision Via BLE</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cloud/">Cloud</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/cloud/">Cloud</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ota/">OTA</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../application-guide/ota/">OTA</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
@@ -78,16 +78,22 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/wifi_apis/">WI-FI</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../wifi_apis/">WI-FI</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ble_apis/">BluetoothLE</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../ble_apis/">BluetoothLE</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/cloud_apis/">Cloud</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../cloud_apis/">Cloud</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ota_apis/">OTA</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../ota_apis/">OTA</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/opl_error_code/">OPL Error Code</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">OPL Error Code</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#header-file-">Header File -</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#enumeration-table-">Enumeration Table -</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -104,9 +110,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>MP</li>
+          <li>API Reference &raquo;</li>
+      <li>OPL Error Code</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/mp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/opl_error_code.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -114,10 +121,70 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="mp">MP</h1>
+                <h1 id="opl-error-code">OPL Error Code</h1>
+<h3 id="header-file-">Header File -</h3>
+<p>quick_dev/common/error/opl_err.h</p>
+<hr />
+<h3 id="enumeration-table-">Enumeration Table -</h3>
+<pre><code class="language-c">typedef enum E_OplErr
+{
+    OPL_OK                                          = 0,
+    OPL_OK_WITH_NO_ACTION,
+    OPL_ERR,
+    OPL_ERR_ALLOC_MEMORY_FAIL,
+    OPL_ERR_PARAM_INVALID,
+    OPL_ERR_CASE_INVALID,
+    OPL_ERR_RTOS_TASK_NOT_INIT,
+    OPL_ERR_RTOS_TASK_REINIT,
+    OPL_ERR_RTOS_QMSG_NOT_INIT,
+    OPL_ERR_RTOS_QMSG_REINIT,
+    OPL_ERR_RTOS_SEND_QMSG_FAIL,
+    OPL_ERR_RTOS_PROC_QMSG_FAIL,
+    OPL_ERR_RTOS_SEM_NOT_INIT,
+    OPL_ERR_RTOS_SEM_REINIT,
+    OPL_ERR_RTOS_EVT_NOT_FOUND,
+    OPL_ERR_FSM_NOT_INIT,
+    OPL_ERR_FSM_REINIT,
+    OPL_ERR_FSM_ST_INVALID,
+    OPL_ERR_FSM_EVT_INVALID,
+    OPL_ERR_IND_CB_REG_INVALID,
+    OPL_ERR_IND_CB_NOT_RELATED,
+    OPL_ERR_USLCTED_CB_REG_INVALID,
+    OPL_ERR_WIFI_EVTLOOP_REINIT,
+    OPL_ERR_WIFI_SCAN_CMD_FAIL,
+    OPL_ERR_WIFI_SCAN_CMD_TIMEOUT,
+    OPL_ERR_WIFI_SCAN_FAIL,
+    OPL_ERR_WIFI_SCAN_NO_AP,
+    OPL_ERR_WIFI_AC_CMD_FAIL,
+    OPL_ERR_WIFI_AC_LIST_EMPTY,
+    OPL_ERR_WIFI_CONNECT_CMD_FAIL,
+    OPL_ERR_WIFI_CONNECT_CMD_TIMEOUT,
+    OPL_ERR_WIFI_CONNECT_FAIL,
+    OPL_ERR_WIFI_DISCONNECT_CMD_FAIL,
+    OPL_ERR_WIFI_DISCONNECT_CMD_TIMEOUT,
+    OPL_ERR_WIFI_DISCONNECT_FAIL,
+    OPL_ERR_BLE_TASK_REINIT,
+    OPL_ERR_BLE_SVC_ASSIGN_INVALID,
+    OPL_ERR_BLE_ENT_ADV_CMD_FAIL,
+    OPL_ERR_BLE_ENT_ADV_FAIL,
+    OPL_ERR_BLE_EXI_ADV_CMD_FAIL,
+    OPL_ERR_BLE_EXI_ADV_FAIL,
+    OPL_ERR_BLE_CONNECT_FAIL,
+    OPL_ERR_BLE_DISCONNECT_CMD_FAIL,
+    OPL_ERR_BLE_DISCONNECT_FAIL,
+    OPL_OTA_SEQ_ERROR,
+    OPL_OTA_FAIL,
+    OPL_OTA_TIMEOUT,
+
+    OPL_ERR_CODE_TOTAL,
+} T_OplErr;
+</code></pre>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../ota_apis/" class="btn btn-neutral float-left" title="OTA"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -143,6 +210,8 @@
           <a href="https://github.com/Opulinks-Tech/QuickDev-Framework" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
+    
+      <span><a href="../ota_apis/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

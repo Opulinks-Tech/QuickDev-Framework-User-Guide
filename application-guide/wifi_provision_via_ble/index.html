@@ -61,6 +61,16 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#provision-process">Provision Process</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#opl-service">OPL Service</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#initialize">Initialize</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#initialize-the-opl-service-in-your-application">Initialize the OPL service in your application</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-a-data-passthrough">Generate a data passthrough</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#how-to">How to...</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#how-to-create-an-user-defined-service-eg-quick_devapp_refble_data_protopl_svcc-in-ble-manager">How to create an user defined service (e.g. quick_dev\app_ref\ble_data_prot\opl_svc.c) in BLE Manager</a>
@@ -90,6 +100,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/wifi_example/">WI-FI</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/host_mode_example/">Host_Mode</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
               <ul>
@@ -100,6 +112,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../api-reference/cloud_apis/">Cloud</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ota_apis/">OTA</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/opl_error_code/">OPL Error Code</a>
                   </li>
               </ul>
       </div>
@@ -116,35 +130,122 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Application Guide &raquo;</li><li>WI-FI Provision Via BLE</li>
+          <li>Application Guide &raquo;</li>
+      <li>WI-FI Provision Via BLE</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/wifi_provision_via_ble.md"
-          class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/wifi_provision_via_ble.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
                 <h1 id="wi-fi-provision-via-ble">WI-FI provision via BLE</h1>
-<p><img alt="wifi_provision_via_ble.png" src="../img/wifi_provision_via_ble.png" /></p>
-<p>This block diagram introduces how to provision Wi-Fi credentials of the Home AP via the Bluetooth low energy (BLE). When the phone (ble central) wants to execute wi-fi provision via ble, it can send wi-fi provision message to BLE Application via BLE Manager. BLE Appication is responsible for parsing the Wi-Fi provision message and sending it to the Network manager for processing according to different events (eg. Wi-Fi scan or Wi-Fi connect). Finally, pass the corresponding response (e.g. scan list result) to the BLE Application via the call back function of Network Manager and then pass it to the phone (BLE central) via BLE Manager. The developer can refer to <a href="../../examples/qd_app_example/">QD_APP</a></p>
+<p>The advantage of dual-core chip (OPL series), QuickDev-Framework provide a process to provision Wi-Fi credentials of the Home AP via the Bluetooth low energy (BLE). This setion can help the developer to quickly understand and implement the protocol into the application.</p>
+<p align="center"><img src="/application-guide/img/wifi_prv_via_ble.png"></p>
+
+<p>This block diagram introduces the architecture of the provision Wi-Fi credentials via BLE. The phone (BLE central) will transmitting the required message to the device. When the device received the message, it will process the Wi-Fi connection base on the given information.</p>
+<p>Opulinks also provide a reference code-base for Phone APP, the front-end developer can use the needed code-base to enhance on their project/product.</p>
+<ul>
+<li>Android APP : </li>
+<li>IOS APP : </li>
+<li>WeChat mini APP : </li>
+</ul>
 <h3 id="provision-process">Provision Process</h3>
-<ul>
-<li><strong>Creates an user defined service (e.g. <code>quick_dev\app_ref\opl_svc.c</code>)</strong> </li>
-</ul>
-<p>The user defined service could create a gatt handler (e.g. <code>OPL_Svc_GattDispatchHandler()</code>) to pass Wi-Fi provision message from phone (BLE central) to BLE Application. The developer can refer to <a href="../ble/">BluetoothLE</a></p>
-<ul>
-<li><strong>Use BLE Application receive handler in application</strong></li>
-</ul>
-<p>The developer can use BLE Application receive handler <code>OPL_DataRecvHandler(uint8_t *pu8Data, uint16_t u16DataLen)</code> to send Wi-Fi provision message to BLE Application <code>quick_dev\app_ref\ble_data_prot\opl_data_prot.c</code> when BLE Application gets Wi-Fi provision message, it parses this message and then send this parsed message to Network Manager to excute Wi-Fi request.</p>
+<p>QuickDev-Framework had provided the Wi-Fi provision via BLE protocol, for a quick look to the example which can demonstrate the Wi-Fi provision via BLE protocol, please check on <a href="../../examples/qd_app_example/">QD_APP</a> section.</p>
+<p>In below diagram, it present a simplify steps that how's the provision done.</p>
+<p align="center"><img src="/application-guide/img/wifi_prv_flow_chart.png"></p>
+
+<p>When the phone (BLE central) wants to provision the Wi-Fi credential and connect to AP, the phone (BLE central) will send the command and required message to the device, e.g. Wi-Fi scan request or Wi-Fi connect request.</p>
+<p>And the device is responsible to receive and parsing the required message, then progress the Network manager to processing according to different events.</p>
+<p>While Network manager had done with indicate or unsolicited callback returns, then the device will transit the corresponding response or result to the the phone (BLE central) for notify the status.</p>
+<p>The focusing of provision process is to create a BLE data command list to letting the phone (BLE central) and the device can recognize the data and handling in such.</p>
+<h3 id="opl-service">OPL Service</h3>
+<p>OPL service is one of the profile service collection in BLE which designed by Opulinks that including the Wi-Fi provision command &amp; handler needed.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>To understand the BLE manager and BLE service can refer to <a href="../ble/">BluetoothLE</a></p>
+</div>
+<p>The OPL service UUID defined in <code>quick_dev/app_ref/ble_data_prot/opl_data/opl_svc.h</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">Service/Characteristic</th>
+<th align="left">UUID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">OPL service</td>
+<td align="left">0xAAAA</td>
+</tr>
+<tr>
+<td align="left">DATA IN character</td>
+<td align="left">0xBBB0</td>
+</tr>
+<tr>
+<td align="left">DATA OUT character</td>
+<td align="left">0xBBB1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="initialize">Initialize</h3>
+<p>To using this service on your application, please follow in below items.</p>
+<h6 id="initialize-the-opl-service-in-your-application">Initialize the OPL service in your application</h6>
+<p>Add <code>OPL_Svc_Init()</code> in <code>app_main.c</code></p>
+<pre><code class="language-c">void APP_BleInit(void)
+{
+    // assign unsolicited callback function
+    Opl_Ble_Uslctd_CB_Reg(&amp;APP_BleUnsolicitedCallback);
+
+    // register service
+    GAP_Svc_Init();
+    GATT_Svc_Init();
+
+    // register opl service
+    OPL_Svc_Init();  // &lt;- initialize OPL service
+
+    // initialize the ble manager (auto-adv)
+    Opl_Ble_Init_Req(true);
+
+    // user implement
+}
+</code></pre>
+<h6 id="generate-a-data-passthrough">Generate a data passthrough</h6>
+<p>When the data received, the <code>OPL_SVC_DATA_IN</code> characteristic contents in OPL service will execute a context switch to passing the received data from BLE manager to host application, so we need to create a catcher on application side, and let it process the data parsing and progress.</p>
+<p align="center"><img src="/application-guide/img/ble_svc_data_pass_block.png"></p>
+
+<p>Add the <code>APP_EVT_BLE_DATA_IND</code> event and handler in <code>app_main.c</code>.</p>
+<pre><code class="language-c">static T_AppEvtHandlerTbl g_tAppEvtHandlerTbl[] = 
+{
+    ...
+
+    {APP_EVT_BLE_DATA_IND,                  APP_EvtHandler_BleDataInd},
+
+    ...
+
+    {0xFFFFFFFF,                            NULL},
+};
+</code></pre>
+<p>Then add <code>OPL_DataRecvHandler()</code> to let the handler do parsing and progress.</p>
 <pre><code class="language-c">static void APP_EvtHandler_BleDataInd(uint32_t u32EventId, void *pData, uint32_t u32DataLen)
 {
     OPL_DataRecvHandler(pData, (uint16_t)u32DataLen);
 }
 </code></pre>
+<p>At final steps, we must enable the protocol definition in `qd_module.h"</p>
+<pre><code class="language-c">//==========================================================
+// &lt;h&gt; OPL Data protocol
+//==========================================================
+
+// &lt;e&gt; OPL_DATA_ENABLED - Opulinks BLE WI-FI data protocol
+//==========================================================
+#ifndef OPL_DATA_ENABLED
+#define OPL_DATA_ENABLED                        (1)
+#endif
+</code></pre>
+<p>And that's the wrap, the Wi-Fi provision via BLE function has been activated in your application. It's recommend to using our standard phone APP by searching "Opulinks Wireless Utilities" at APP store to try with.</p>
 <h2 id="how-to">How to...</h2>
 <h3 id="how-to-create-an-user-defined-service-eg-quick_devapp_refble_data_protopl_svcc-in-ble-manager">How to create an user defined service (e.g. <code>quick_dev\app_ref\ble_data_prot\opl_svc.c</code>) in BLE Manager</h3>
 <p>Please refer to <a href="../ble/">BluetoothLE</a></p>

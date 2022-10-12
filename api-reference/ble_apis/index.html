@@ -74,6 +74,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/wifi_example/">WI-FI</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/host_mode_example/">Host_Mode</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
               <ul class="current">
@@ -81,11 +83,47 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="./">BluetoothLE</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#ble-manager">BLE Manager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#header-file-">Header File -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#api-list-">API List -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#functions-">Functions -</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_init_req">Opl_Ble_Init_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_start_req">Opl_Ble_Start_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_stop_req">Opl_Ble_Stop_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_uslctd_cb_reg">Opl_Ble_Uslctd_CB_Reg</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_send_message">Opl_Ble_Send_Message</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_service_assign">Opl_Ble_Service_Assign</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_advertise_data_set">Opl_Ble_Advertise_Data_Set</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_scanrsp_data_set">Opl_Ble_ScanRsp_Data_Set</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_entityget">Opl_Ble_EntityGet</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_macaddr_write">Opl_Ble_MacAddr_Write</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_ble_macaddr_read">Opl_Ble_MacAddr_Read</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../cloud_apis/">Cloud</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ota_apis/">OTA</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../opl_error_code/">OPL Error Code</a>
                   </li>
               </ul>
       </div>
@@ -102,19 +140,308 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>API Reference &raquo;</li><li>BluetoothLE</li>
+          <li>API Reference &raquo;</li>
+      <li>BluetoothLE</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/ble_apis.md"
-          class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/ble_apis.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="ble-api-list">BLE (API List)</h1>
+                <h1 id="ble">BLE</h1>
+<h2 id="ble-manager">BLE Manager</h2>
+<h3 id="header-file-">Header File -</h3>
+<p>quick_dev/app_ref/mngr_api/ble_mngr_api.h</p>
+<h3 id="api-list-">API List -</h3>
+<table>
+<thead>
+<tr>
+<th align="left">API Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#opl_ble_init_req">Opl_Ble_Init_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_start_req">Opl_Ble_Start_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_stop_req">Opl_Ble_Stop_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_uslctd_cb_reg">Opl_Ble_Uslctd_CB_Reg</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_send_message">Opl_Ble_Send_Message</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_service_assign">Opl_Ble_Service_Assign</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_advertise_data_set">Opl_Ble_Advertise_Data_Set</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_scanrsp_data_set">Opl_Ble_ScanRsp_Data_Set</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_entityget">Opl_Ble_EntityGet</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_macaddr_write">Opl_Ble_MacAddr_Write</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_ble_macaddr_read">Opl_Ble_MacAddr_Read</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="functions-">Functions -</h3>
+<hr />
+<h6 id="opl_ble_init_req">Opl_Ble_Init_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Init_Req(uint8_t u8AutoAdvEn);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Ble manager initiate function </p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u8AutoAdvEn:</p>
+<p>&emsp;&emsp;true -&gt; will enable auto-advertise while disconnect (also will enable advertise after init)</p>
+<p>&emsp;&emsp;false -&gt; will not enable auto-advertise while disconnect (also won't enable advertise after init)</p>
+<hr />
+<h6 id="opl_ble_start_req">Opl_Ble_Start_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Start_Req(uint8_t u8AutoAdvEn);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Start ble advertising</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;U8AutoAdvEn: enable auto-advertise while disconnect</p>
+<hr />
+<h6 id="opl_ble_stop_req">Opl_Ble_Stop_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Stop_Req(void);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Stop ble advertising</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<hr />
+<h6 id="opl_ble_uslctd_cb_reg">Opl_Ble_Uslctd_CB_Reg</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Uslctd_CB_Reg(T_BmUslctedCbFp fpUslctdCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Register unsolicited callback for ble manager </p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;fpUslctdCb: unsolicited callback function pointer</p>
+<hr />
+<!-- ###### T_BmUslctedCbFp
+
+* **Callback Prototype**
+
+<pre><code class="language-c">typedef void (* T_BmUslctedCbFp)(uint16_t u16EvtType, T_OplErr tEvtRst, uint8_t *pu8Data, uint32_t u32DataLen);
+</code></pre>
+
+
+* **Description**
+
+&emsp;&emsp;Ble manager unsolicited callback typedef
+
+* **Return**
+
+&emsp;&emsp;Reference to [opl_err](./opl_error_code.md)
+
+* **Parameters**
+
+&emsp;&emsp;u16EvtType: Ble manager unsolicited event type
+
+&emsp;&emsp;tEvtRst: unsolicited event structure
+
+&emsp;&emsp;u8Data: data buffer sent from ble manager to User Application
+
+&emsp;&emsp;u32DataLen: length of data buffer
+
+------------------------------------------------------------------------ -->
+<h6 id="opl_ble_send_message">Opl_Ble_Send_Message</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Send_Message(uint16_t u16Event, uint8_t *u8Data, uint32_t u32DataLen, uint32_t u32DelayMs);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Send message to task </p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u16Event: event id (define by user)</p>
+<p>&emsp;&emsp;u8Data: data send to ble manager</p>
+<p>&emsp;&emsp;u32DataLen: data lens send to ble manager</p>
+<p>&emsp;&emsp;u32DelayMs: delay time to trigger event</p>
+<hr />
+<h6 id="opl_ble_service_assign">Opl_Ble_Service_Assign</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Service_Assign(T_BmSvcHandle *ptBmSvcHandle);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Register ble service</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;ptBmSvcHandle: ble service structure</p>
+<hr />
+<h6 id="opl_ble_advertise_data_set">Opl_Ble_Advertise_Data_Set</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_Advertise_Data_Set(uint8_t *pau8AdvData, uint8_t u8AdvDataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Setting ble advertise data</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pau8AdvData: advertise data</p>
+<p>&emsp;&emsp;u8AdvDataLen: advertise data Len</p>
+<hr />
+<h6 id="opl_ble_scanrsp_data_set">Opl_Ble_ScanRsp_Data_Set</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_ScanRsp_Data_Set(uint8_t *pau8ScanRspData, uint8_t u8ScanRspDataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Setting ble scan respone data</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pau8ScanRspData: scan response data</p>
+<p>&emsp;&emsp;u8ScanRspDataLen: scan response data len</p>
+<hr />
+<h6 id="opl_ble_entityget">Opl_Ble_EntityGet</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">BLE_APP_DATA_T *Opl_Ble_EntityGet(void);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get ble task entity</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;G_tTheBle – success, Other – failed</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<hr />
+<h6 id="opl_ble_macaddr_write">Opl_Ble_MacAddr_Write</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_MacAddr_Write(uint8_t *pau8Data);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Write ble mac address</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;Pau8Data: mac address array</p>
+<hr />
+<h6 id="opl_ble_macaddr_read">Opl_Ble_MacAddr_Read</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Ble_MacAddr_Read(uint8_t *pau8Data);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Read ble mac address</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;Pau8Data: mac address array</p>
               
             </div>
           </div><footer>

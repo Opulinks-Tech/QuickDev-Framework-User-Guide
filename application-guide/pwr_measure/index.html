@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Log Configuration - Quick-DEV Programming Guide</title>
+    <title>Power measurment - Quick-DEV Programming Guide</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Log Configuration";
-        var mkdocs_page_input_path = "application-guide\\log_config.md";
+        var mkdocs_page_name = "Power measurment";
+        var mkdocs_page_input_path = "application-guide\\pwr_measure.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -48,12 +48,10 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Application Guide</span></p>
-              <ul class="current">
+              <ul>
                   <li class="toctree-l1"><a class="reference internal" href="../project_config/">Project Configuration</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Log Configuration</a>
-    <ul class="current">
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../log_config/">Log Configuration</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../wifi/">WI-Fi</a>
                   </li>
@@ -106,10 +104,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Application Guide &raquo;</li>
-      <li>Log Configuration</li>
+      <li>Power measurment</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/log_config.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/pwr_measure.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -117,90 +114,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="log-configuration">Log Configuration</h1>
-<p>The Log Configuration <code>quick_dev\common\log\log.h</code> is the configuration that package one layer on bottom layer <code>tracer_log</code> in <code>sdk\SDK\APS\middleware\netlink\msg\msg.h</code>. The log configuration can help developer to trace and debug in application, the log can divide into four types that are debug, information, warnnimg and error. The developer can switch the log level that they want to see according to their needs. To enter <code>tracer level &lt;task_index&gt; &lt;task_level:hex&gt;</code>  could turn on tracer level in debug console. </p>
-<p>If wanting to trace log with Log Configration, the developer could use <code>tracer_def_level_set()</code>  to set trcae log. The developer can refer to the following examples</p>
-<pre><code class="language-c">static void Main_AppInit_patch(void)
-{
-    sys_cfg_clk_set(SYS_CFG_CLK_RATE);
-
-    // set default tracer level in user app type to INFO, WARN, ERRO (DEBG not open)
-    tracer_def_level_set(TRACER_TASK_TYPE_APP, 0x06);
-
-    APP_MainInit();
-}
-</code></pre>
-<p>The argument <code>TRACER_TASK_TYPE_APP</code> is a trace type that include <code>TRACER_TASK_TYPE_INTERNAL</code> (bottom layer) and <code>TRACER_TASK_TYPE_APP</code> (application) defined in <code>sdk\SDK\APS\middleware\netlink\msg\msg.h</code>. </p>
-<pre><code class="language-c">typedef enum
-{
-    TRACER_TASK_TYPE_INTERNAL = 0,
-    TRACER_TASK_TYPE_APP,
-
-    TRACER_TASK_TYPE_MAX
-} T_TracerTaskType;
-</code></pre>
-<p>The other argument <code>0x06</code> is trace level that developer want to trace. There are the following trace level in <code>sdk\SDK\APS\middleware\netlink\msg\msg.h</code>. </p>
-<pre><code class="language-c">#define LOG_HIGH_LEVEL              0x04
-#define LOG_MED_LEVEL               0x02
-#define LOG_LOW_LEVEL               0x01
-#define LOG_NONE_LEVEL              0x00
-#define LOG_ALL_LEVEL               (LOG_HIGH_LEVEL | LOG_MED_LEVEL | LOG_LOW_LEVEL)
-</code></pre>
-<p>The argument <code>0x06</code> means trace log level turn on <code>LOG_HIGH_LEVEL</code> and <code>LOG_MED_LEVEL</code> but <code>LOG_LOW_LEVEL</code> is turn off. Log Configuration has the following log levels :</p>
+                <h1 id="power-measurment">Power measurment</h1>
+<p>This section demonstrate that how to measure the power consumption base on <code>tcp_demo</code> example.</p>
 <ul>
-<li>Debug (<code>LOG_LOW_LEVEL</code>) </li>
+<li>linker to SDK file (Power-Saving-Introduction &amp; Power-Consumption-Measurement-Guide)</li>
 </ul>
-<pre><code class="language-c">#define OPL_LOG_DEBG(module, ...)                                           \
-        {                                                                   \
-            tracer_log(LOG_LOW_LEVEL, &quot;\x1B[0m[D][%s]&quot;, #module);           \
-            tracer_log(LOG_LOW_LEVEL, __VA_ARGS__);                         \
-            tracer_log(LOG_LOW_LEVEL, &quot;\r\n&quot;);                              \
-        }
-</code></pre>
-<ul>
-<li>Info (<code>LOG_MED_LEVEL</code>)</li>
-</ul>
-<pre><code class="language-c">#define OPL_LOG_INFO(module, ...)                                           \
-        {                                                                   \
-            tracer_log(LOG_MED_LEVEL, &quot;\x1B[0m[I][%s]&quot;, #module);           \
-            tracer_log(LOG_MED_LEVEL, __VA_ARGS__);                         \
-            tracer_log(LOG_MED_LEVEL, &quot;\r\n&quot;);                              \
-        }
-</code></pre>
-<ul>
-<li>Warn (<code>LOG_MED_LEVEL</code>)</li>
-</ul>
-<pre><code class="language-c">#define OPL_LOG_WARN(module, ...)                                           \
-        {                                                                   \
-            tracer_log(LOG_MED_LEVEL, &quot;\x1B[33m[W][%s]&quot;, #module);          \
-            tracer_log(LOG_MED_LEVEL, __VA_ARGS__);                         \
-            tracer_log(LOG_MED_LEVEL, &quot;\x1B[0m\r\n&quot;);                       \
-        }
-</code></pre>
-<ul>
-<li>Error (<code>LOG_HIGH_LEVEL</code>)</li>
-</ul>
-<pre><code class="language-c">#define OPL_LOG_ERRO(module, ...)                                           \
-        {                                                                   \
-            tracer_log(LOG_HIGH_LEVEL, &quot;\x1B[31m[E][%s]&quot;, #module);         \
-            tracer_log(LOG_HIGH_LEVEL, __VA_ARGS__);                        \
-            tracer_log(LOG_HIGH_LEVEL, &quot;\x1B[0m\r\n&quot;);                      \
-        }
-
-</code></pre>
-<p>The developer could set what module in the argument <code>module</code>.</p>
-<p>Log configuration can also be set according to the log of which module (e.g. BLE Manager log)the developer wants to see in <code>qd_module.h</code>. Module log enable set (1) (e.g. BM_LOG_ENABLED)</p>
-<pre><code class="language-c">#ifndef BM_LOG_ENABLED
-#define BM_LOG_ENABLED                          (1)
-#endif
-</code></pre>
+<h2 id="power-mode-setting-from-quickdev_framework">Power mode (setting from QuickDev_Framework)</h2>
+<h3 id="power-mode-configure">Power mode configure</h3>
+<h6 id="low-power-mode">Low-power mode</h6>
+<h6 id="balance-mode">Balance mode</h6>
+<h6 id="performance-mode">Performance mode</h6>
+<h2 id="measuring-current-consumption">Measuring current consumption</h2>
+<h3 id="measure-on-evb">Measure on EVB</h3>
+<h3 id="_1"></h3>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../project_config/" class="btn btn-neutral float-left" title="Project Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../wifi/" class="btn btn-neutral float-right" title="WI-Fi">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -227,10 +156,6 @@
         </span>
     
     
-      <span><a href="../project_config/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../wifi/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -84,6 +84,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/wifi_example/">WI-FI</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/host_mode_example/">Host_Mode</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
               <ul>
@@ -94,6 +96,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../../api-reference/cloud_apis/">Cloud</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../api-reference/ota_apis/">OTA</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../api-reference/opl_error_code/">OPL Error Code</a>
                   </li>
               </ul>
       </div>
@@ -110,15 +114,14 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Application Guide &raquo;</li><li>Cloud</li>
+          <li>Application Guide &raquo;</li>
+      <li>Cloud</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/cloud.md"
-          class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/cloud.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -269,7 +272,7 @@
 #endif /* CLOUD_TX_DATA_BACKUP_ENABLED */
 }
 </code></pre>
-<p>Please refer to <a href="../ota/">OTA</a> (<strong>"OTA via WI-FI"</strong>) about CLOUD OTA.</p>
+<p>Please refer to <a href="../ota/#ota-via-wi-fi">OTA via Wi-Fi</a> about CLOUD OTA.</p>
 <h3 id="how-to">How To...</h3>
 <h4 id="how-to-port-publicprivate-cloud-that-utilizes-cloud-template">How to port public/private cloud that utilizes Cloud Template</h4>
 <p>The developer can copy the folder <code>quick_dev\app_ref\cloud\cloud_template</code> to <code>quick_dev\app_ref\cloud</code> that copied folder could rename <code>my_cloud</code> to execute cloud process. There are two important files <code>cloud_kernel.c</code> (Cloud Kernel) &amp; <code>cloud_ctrl.c</code> (Cloud Control). Cloud Kernel is responsible for receiving cloud events and data, then passing to these event's handlers. These handlers are located at Cloud Control. In <code>cloud_kernel.c</code> (Cloud Kernel), there are two components that are <code>Cloud_TxTaskHandler</code> (Cloud TX) and <code>Cloud_RxTaskHandler</code> (Cloud RX). </p>

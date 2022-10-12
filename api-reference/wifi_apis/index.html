@@ -74,6 +74,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../../examples/wifi_example/">WI-FI</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/host_mode_example/">Host_Mode</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
               <ul class="current">
@@ -81,13 +83,91 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#network-manager">Network Manager</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#header-file">Header File</a>
+    <li class="toctree-l3"><a class="reference internal" href="#header-file-">Header File -</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a>
+    <li class="toctree-l3"><a class="reference internal" href="#api-list-">API List -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#functions-">Functions -</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#app_nminit">APP_NmInit</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#app_nminitandcnct">APP_NmInitAndCnct</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#app_nmeventproc">APP_NmEventProc</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#app_nmquickcnctsetreq">APP_NmQuickCnctSetReq</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#app_nmwifiscanreq">APP_NmWifiScanReq</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#app_nmwificnctreq">APP_NmWifiCnctReq</a>
+    </li>
+        </ul>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#wi-fi-manager">WI-FI Manager</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#header-file-_1">Header File -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#api-list-_1">API List -</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#functions-_1">Functions -</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_init_req">Opl_Wifi_Init_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_scan_req">Opl_Wifi_Scan_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_conn_req">Opl_Wifi_Conn_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_disc_req">Opl_Wifi_Disc_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_uslctd_cb_reg">Opl_Wifi_Uslctd_CB_Reg</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_ac_enable_req">Opl_Wifi_AC_Enable_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_ac_disable_req">Opl_Wifi_AC_Disable_Req</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_profile_ins">Opl_Wifi_Profile_Ins</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_profile_get">Opl_Wifi_Profile_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_profile_clear">Opl_Wifi_Profile_Clear</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_apinfo_get">Opl_Wifi_ApInfo_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_macaddr_get">Opl_Wifi_MacAddr_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_manufname_get">Opl_Wifi_ManufName_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_configsource_get">Opl_Wifi_ConfigSource_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_rssi_get">Opl_Wifi_Rssi_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_apnum_get">Opl_Wifi_ApNum_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_aprecord_get">Opl_Wifi_ApRecord_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_autoconnectapnum_get">Opl_Wifi_AutoConnectApNum_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_autoconnectapinfo_get">Opl_Wifi_AutoConnectApInfo_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_autoconnectlistnum_get">Opl_Wifi_AutoConnectListNum_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_scanlist_get">Opl_Wifi_ScanList_Get</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_macaddr_set">Opl_Wifi_MacAddr_Set</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_manufname_set">Opl_Wifi_ManufName_Set</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_configsource_set">Opl_Wifi_ConfigSource_Set</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_skip_dtim_module_reg">Opl_Wifi_Skip_Dtim_Module_Reg</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#opl_wifi_skip_dtim_set">Opl_Wifi_Skip_Dtim_Set</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     </ul>
                   </li>
@@ -96,6 +176,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../cloud_apis/">Cloud</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ota_apis/">OTA</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../opl_error_code/">OPL Error Code</a>
                   </li>
               </ul>
       </div>
@@ -112,39 +194,842 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>API Reference &raquo;</li><li>WI-FI</li>
+          <li>API Reference &raquo;</li>
+      <li>WI-FI</li>
     <li class="wy-breadcrumbs-aside">
-        <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/wifi_apis.md"
-          class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/api-reference/wifi_apis.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
                 <h1 id="wi-fi">WI-FI</h1>
 <h2 id="network-manager">Network Manager</h2>
-<p>Network Manager provide support for configuring and monitoring WI-FI networking functionality. We stronly recommend using NM, because NM could help network robust.</p>
-<h3 id="header-file">Header File</h3>
-<p>net_mngr.h </p>
-<h3 id="functions">Functions</h3>
-<pre><code class="language-c">   T_OplErr APP_NmWifiScanReq(T_NmScanDoneIndCbFp fpIndCb)
-</code></pre>
-<table><tr><td bgcolor=blue>Description</td></tr></table>
+<p>Network Manager provide support for configuring and monitoring WI-FI networking functionality. We strongly recommend enabling network manager due to the rebust usage of Wi-Fi networking.</p>
+<h3 id="header-file-">Header File -</h3>
+<p>quick_dev/app_ref/mngr_api/net_mngr_api.h</p>
+<h3 id="api-list-">API List -</h3>
+<table>
+<thead>
+<tr>
+<th align="left">API Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#app_nminit">APP_NmInit</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#app_nminitandcnct">APP_NmInitAndCnct</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#app_nmeventproc">APP_NmEventProc</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#app_nmquickcnctsetreq">APP_NmQuickCnctSetReq</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#app_nmwifiscanreq">APP_NmWifiScanReq</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#app_nmwificnctreq">APP_NmWifiCnctReq</a></td>
+</tr>
+</tbody>
+</table>
+<!-- | [APP_NmEventProc](#t_nmuslctedevttype) | -->
 
-<p>Trigger WI-FI scan request, and carried the scan result in indicate callback</p>
-<p><strong>Parameters</strong></p>
-<p>fpIndCb : indicate callback function pointer (if required)</p>
-<p><strong>Returns </strong></p>
-<p>T_OplErr : see in opl_err.h</p>
+<h3 id="functions-">Functions -</h3>
+<hr />
+<h6 id="app_nminit">APP_NmInit</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_oplErr APP_NmInit(uint8_t u8AcEnable, T_NmUslctdCbFp fpUslctdCb)
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Network manager initiate function (optional to assign unsolicited callback)</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u8AcEnable: enable auto-connect</p>
+<p>&emsp;&emsp;fpUslctdCb: unsolicited callback function pointer</p>
+<hr />
+<h6 id="app_nminitandcnct">APP_NmInitAndCnct</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr APP_NmInitAndCnct(T_NmUslctdCbFp fpUslctdCb, T_NmWifiCnctConfig *ptNmWifiCnctConfig);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Network manager initiate function and trigger WI-FI connect direclty</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>optional to assign unsolicited callback</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>SSID &amp; PWD connection only, and will clear all profile record only store the assigned one</p>
+</div>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;fpUslctdCb: unsolicited callback function pointer</p>
+<p>&emsp;&emsp;ptNmWifiCnctConfig: WI-FI connect config</p>
+<hr />
+<h6 id="app_nmeventproc">APP_NmEventProc</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr APP_NmEventProc(uint32_t u32EventId, uint8_t *u8Data, uint32_t u32DataLen);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Network manager event process (context in app_main, should runs in app_main task)</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u32EventId: network manager event ID</p>
+<p>&emsp;&emsp;u8Data: data send to network manager</p>
+<p>&emsp;&emsp;data lens send to network manager</p>
+<hr />
+<h6 id="app_nmquickcnctsetreq">APP_NmQuickCnctSetReq</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr APP_NmQuickCnctSetReq(T_NmWifiQCnctSet *ptNmWifiQCnctSet, T_NmQCnctSetIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Trigger Wi-Fi quick connect set request, that is insert AP profile and enable auto </p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp; fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="app_nmwifiscanreq">APP_NmWifiScanReq</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr APP_NmWifiScanReq(T_NmScanDoneIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Trigger WI-FI scan request, and carried the scan result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="app_nmwificnctreq">APP_NmWifiCnctReq</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr APP_NmWifiCnctReq(T_NmWifiCnctConfig *ptNmWifiCnctConfig, T_NmCnctIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Trigger WI-FI connect request, and carried the connect result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;ptWmWifiCnctConfig: WI-FI connect configuration</p>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<!-- ###### T_NmUslctedEvtType
+
+* **Callback Prototype**
+
+<pre><code class="language-c">   typedef void (* T_NmUslctdCbFp)(T_NmUslctdEvtType tEvtType, unit_8 *pu8Data, uint32_t u32DataLen);
+</code></pre>
+
+
+* **Description**
+
+&emsp;&emsp;Network manager unsolicited callback typedef
+
+* **Parameters**
+
+&emsp;&emsp;T_NmUslctdEvtType: Network manager unsolicited event type
+
+&emsp;&emsp;u8Data: data buffer sent from network manager to User Application
+
+&emsp;&emsp;u32DataLen: length of data buffer
+
+**T_NmUslctdEvtType:**
+
+
+<pre><code class="language-c">typedef enum E_NmUslctdEvtType
+{
+    NM_USLCTD_EVT_NETWORK_UP    = 0,
+    NM_USLCTD_EVT_NETWORK_DOWN,
+    NM_USLCTD_EVT_NETWORK_RESET,
+} T_NmUslctdEvtType;
+</code></pre>
+
+
+| Parameters | tEvtType                    | pu8Data | u32DataLen  |
+| :--------- | :-------------------------- | :------ | :---------- |
+|            | NM_USLCTD_EVT_NETWORK_UP    | SSID    | SSID length |
+|            | NM_USLCTD_EVT_NETWORK_DOWN  | N/A     | N/A         |
+|            | NM_USLCTD_EVT_NETWORK_RESET | N/A     | N/A         |
+
+------------------------------------------------------------------------ -->
+
 <h2 id="wi-fi-manager">WI-FI Manager</h2>
+<h3 id="header-file-_1">Header File -</h3>
+<p>quick_dev/app_ref/mngr_api/wifi_mngr_api.h</p>
+<h3 id="api-list-_1">API List -</h3>
+<table>
+<thead>
+<tr>
+<th align="left">API Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#opl_wifi_init_req">Opl_Wifi_Init_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_scan_req">Opl_Wifi_Scan_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_conn_req">Opl_Wifi_Conn_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_disc_req">Opl_Wifi_Disc_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_uslctd_cb_reg">Opl_Wifi_Uslctd_CB_Reg</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_ac_enable_req">Opl_Wifi_AC_Enable_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_ac_disable_req">Opl_Wifi_AC_Disable_Req</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_profile_ins">Opl_Wifi_Profile_Ins</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_profile_get">Opl_Wifi_Profile_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_profile_clear">Opl_Wifi_Profile_Clear</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_apinfo_get">Opl_Wifi_ApInfo_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_macaddr_get">Opl_Wifi_MacAddr_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_manufname_get">Opl_Wifi_ManufName_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_configsource_get">Opl_Wifi_ConfigSource_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_rssi_get">Opl_Wifi_Rssi_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_apnum_get">Opl_Wifi_ApNum_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_aprecord_get">Opl_Wifi_ApRecord_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_autoconnectapnum_get">Opl_Wifi_AutoConnectApNum_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_autoconnectapinfo_get">Opl_Wifi_AutoConnectApInfo_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_autoconnectlistnum_get">Opl_Wifi_AutoConnectListNum_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_scanlist_get">Opl_Wifi_ScanList_Get</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_macaddr_set">Opl_Wifi_MacAddr_Set</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_manufname_set">Opl_Wifi_ManufName_Set</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_configsource_set">Opl_Wifi_ConfigSource_Set</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_skip_dtim_module_reg">Opl_Wifi_Skip_Dtim_Module_Reg</a></td>
+</tr>
+<tr>
+<td align="left"><a href="#opl_wifi_skip_dtim_set">Opl_Wifi_Skip_Dtim_Set</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="functions-_1">Functions -</h3>
+<hr />
+<h6 id="opl_wifi_init_req">Opl_Wifi_Init_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Init_Req(T_WaInitDoneIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;WI-FI manager initiate function, and carried the init result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;fpUslctdCb: unsolicited callback function pointer</p>
+<hr />
+<!-- ###### T_WaInitDoneIndCbFp
+
+* **Callback Prototype**
+
+<pre><code class="language-c">typedef void (* T_WaInitDoneIndCbFp)(T_OplErr tEvtRst);
+</code></pre>
+
+
+* **Description**
+
+&emsp;&emsp;WiFi agent inicate callback typedef
+
+* **Parameters**
+
+&emsp;&emsp;T_OplErr: Wi-Fi manager unsolicited event structure
+
+------------------------------------------------------------------------ -->
+<h6 id="opl_wifi_scan_req">Opl_Wifi_Scan_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Scan_Req(wifi_scan_config_t *ptWifiScanConfig, T_WaScanDoneIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Trigger WI-FI scan request, and carried the scan result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;ptWifiScanConfig: scan config structure</p>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="opl_wifi_conn_req">Opl_Wifi_Conn_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Conn_Req(T_WmConnConfig *ptWifiConnConfig, T_WaConnectIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Trigger WI-FI connect request, and carried the connect result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;ptWifiConnConfig: connect config structure</p>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="opl_wifi_disc_req">Opl_Wifi_Disc_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Disc_Req(T_WaDisconnectIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Trigger WI-FI disconnect request, and carried the disconnect result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="opl_wifi_uslctd_cb_reg">Opl_Wifi_Uslctd_CB_Reg</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Uslctd_CB_Reg(T_WmUslctedCbFp fpUslctdCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Register unsolicited callback for WI-FI manager</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="opl_wifi_ac_enable_req">Opl_Wifi_AC_Enable_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_AC_Enable_Req(T_AcEnableIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Enable auto-connect request, and carried the enable result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="opl_wifi_ac_disable_req">Opl_Wifi_AC_Disable_Req</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_AC_Disable_Req(bool blActDisconnect, T_AcDisableIndCbFp fpIndCb);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Disable auto-connect request, and carried the disabled result in indicate callback</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;blActDisconnect:</p>
+<p>&emsp;&emsp;&emsp;&emsp;true -&gt; will do WI-FI disconnect while disable auto-connect</p>
+<p>&emsp;&emsp;&emsp;&emsp;false -&gt; will not do WI-FI disconnect while disable auto-connect</p>
+<p>&emsp;&emsp;fpIndCb: indicate callback function pointer (if required)</p>
+<hr />
+<h6 id="opl_wifi_profile_ins">Opl_Wifi_Profile_Ins</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Opl_Wifi_Profile_Ins(T_PrApProfile tNewProfile);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Insert WI-FI AP information into AP profile list</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;tNewProfile: AP information structure</p>
+<hr />
+<h6 id="opl_wifi_profile_get">Opl_Wifi_Profile_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_PrApProfilePtr Opl_Wifi_Profile_Get(void);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get WI-FI AP profile list</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;AP profile list</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<hr />
+<h6 id="opl_wifi_profile_clear">Opl_Wifi_Profile_Clear</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">void Opl_Wifi_Profile_Clear(void);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Clear WI-FI AP profile list</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;None</p>
+<hr />
+<h6 id="opl_wifi_apinfo_get">Opl_Wifi_ApInfo_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ApInfo_Get(wifi_ap_record_t *ptApRecord);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get WI-FI AP information</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;ptApRecord: AP information</p>
+<hr />
+<h6 id="opl_wifi_macaddr_get">Opl_Wifi_MacAddr_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_MacAddr_Get(uint8_t *pu8Address);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get WI-FI mac address</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pu8Address: WI-FI mac address</p>
+<hr />
+<h6 id="opl_wifi_manufname_get">Opl_Wifi_ManufName_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ManufName_Get(uint8_t *pu8Name);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get manufacturer name</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp; pu8Name: manufacturer name</p>
+<hr />
+<h6 id="opl_wifi_configsource_get">Opl_Wifi_ConfigSource_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ConfigSource_Get(T_WmWifiGetConfigSource *tWmWifiGetConfigSource);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get configure source</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;tWmWifiGetConfigSource: configure source structure</p>
+<hr />
+<h6 id="opl_wifi_rssi_get">Opl_Wifi_Rssi_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Rssi_Get(int8_t *pi8Rssi);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get current rssi value</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pi8Rssi: rssi value</p>
+<hr />
+<h6 id="opl_wifi_apnum_get">Opl_Wifi_ApNum_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ApNum_Get(uint16_t *pu16ApCount, wifi_scan_info_t *ptScanInfo);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get AP scanned number</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pu16ApCount: count number of AP</p>
+<p>&emsp;&emsp;ptScanInfo: sacn information structure</p>
+<hr />
+<h6 id="opl_wifi_aprecord_get">Opl_Wifi_ApRecord_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ApRecord_Get(uint16_t *pu16ApCount, wifi_scan_info_t *ptScanInfo);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get AP record</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pu16ApCount: count number of AP</p>
+<p>&emsp;&emsp;ptScanInfo: sacn information structure</p>
+<hr />
+<h6 id="opl_wifi_autoconnectapnum_get">Opl_Wifi_AutoConnectApNum_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_AutoConnectApNum_Get(uint8_t *pu8Num);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get auto-connect AP number</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;Pu8Num: auto-connect AP number</p>
+<hr />
+<h6 id="opl_wifi_autoconnectapinfo_get">Opl_Wifi_AutoConnectApInfo_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_AutoConnectApInfo_Get(uint8_t u8Index, wifi_auto_connect_info_t *ptAutoConnInfo);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get specific auto-connect AP information</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u8Index: index of auto-connect list</p>
+<p>&emsp;&emsp;ptAutoConnInfo: auto-connect AP information structure</p>
+<hr />
+<h6 id="opl_wifi_autoconnectlistnum_get">Opl_Wifi_AutoConnectListNum_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_AutoConnectListNum_Get(uint8_t *pu8Num);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get auto-connect list number</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;Pu8Num: auto-connect list number</p>
+<hr />
+<h6 id="opl_wifi_scanlist_get">Opl_Wifi_ScanList_Get</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ScanList_Get(wifi_scan_list_t *ptScanList);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Get scan list result</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;ptScanList: scan list structure</p>
+<hr />
+<h6 id="opl_wifi_macaddr_set">Opl_Wifi_MacAddr_Set</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_MacAddr_Set(uint8_t *pu8Address);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Set Wi-Fi mac address</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;pu8Address: WI-FI mac address</p>
+<hr />
+<h6 id="opl_wifi_manufname_set">Opl_Wifi_ManufName_Set</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ManufName_Set(uint8_t *pu8Name);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Set manufacturer name</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;tWmWifiSetConfigSource: configure source structure</p>
+<hr />
+<h6 id="opl_wifi_configsource_set">Opl_Wifi_ConfigSource_Set</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_ConfigSource_Set(T_WmWifiSetConfigSource *tWmWifiSetConfigSource);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Set configure sourse</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;tWmWifiSetConfigSource: configure source structure</p>
+<hr />
+<h6 id="opl_wifi_skip_dtim_module_reg">Opl_Wifi_Skip_Dtim_Module_Reg</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Skip_Dtim_Module_Reg(uint16_t *u16ModuleId);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Resgister skip DTIM module</p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u16ModuleId: skip DTIM module ID</p>
+<hr />
+<h6 id="opl_wifi_skip_dtim_set">Opl_Wifi_Skip_Dtim_Set</h6>
+<ul>
+<li><strong>Prototype</strong></li>
+</ul>
+<pre><code class="language-c">T_OplErr Opl_Wifi_Skip_Dtim_Set(uint16_t u16ModuleId, uint8_t u8Enable);
+</code></pre>
+<ul>
+<li><strong>Description</strong></li>
+</ul>
+<p>&emsp;&emsp;Set skip DTIM </p>
+<ul>
+<li><strong>Return</strong></li>
+</ul>
+<p>&emsp;&emsp;Reference to <a href="../opl_error_code/">opl_err</a></p>
+<ul>
+<li><strong>Parameters</strong></li>
+</ul>
+<p>&emsp;&emsp;u16ModuleId: registed skip DTIM module ID</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>must reigster by calling Opl_Wifi_Skip_Dtim_Module_Reg first</p>
+</div>
+<p>&emsp;&emsp;u8Enable: true -&gt; skip DTIM, false -&gt; no skip DTIM</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../examples/wifi_example/" class="btn btn-neutral float-left" title="WI-FI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../examples/host_mode_example/" class="btn btn-neutral float-left" title="Host_Mode"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../ble_apis/" class="btn btn-neutral float-right" title="BluetoothLE">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -173,7 +1058,7 @@
         </span>
     
     
-      <span><a href="../../examples/wifi_example/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../examples/host_mode_example/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../ble_apis/" style="color: #fcfcfc">Next &raquo;</a></span>
