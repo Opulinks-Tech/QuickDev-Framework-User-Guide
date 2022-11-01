@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Power measurment - Quick-DEV Programming Guide</title>
+    <title>Power Measure - Quick-DEV Programming Guide</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Power measurment";
+        var mkdocs_page_name = "Power Measure";
         var mkdocs_page_input_path = "application-guide\\pwr_measure.md";
         var mkdocs_page_url = null;
       </script>
@@ -48,12 +48,56 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Application Guide</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="project_config.html">Project Configuration</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="pwr_measure.html">Power Measure</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#power-mode">Power Mode</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#low-power-mode">Low-Power Mode</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#balance-mode">Balance Mode</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#configuration_1">Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#performance-mode">Performance Mode</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#configuration_2">Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#user-define">User Define</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#measuring-current-consumption">Measuring current consumption</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#wiring-the-dev-kit">Wiring the Dev-Kit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#measure-with-tcp-demo-example">Measure with TCP demo example</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#situation-1-periodic-post-and-keep-alive">Situation 1: Periodic post and keep-alive</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#situation-2-only-keep-alive">Situation 2: Only keep-alive</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#situation-3-idle">Situation 3: Idle</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="log_config.html">Log Configuration</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="wifi.html">WI-Fi</a>
+                  <li class="toctree-l1"><a class="reference internal" href="wifi.html">WI-FI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="ble.html">BluetoothLE</a>
                   </li>
@@ -75,6 +119,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../examples/wifi_example.html">WI-FI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../examples/host_mode_example.html">Host_Mode</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/ota_example.html">OTA</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
@@ -104,7 +150,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Power measurment</li>
+          <li>Application Guide &raquo;</li>
+      <li>Power Measure</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/pwr_measure.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -114,22 +161,261 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="power-measurment">Power measurment</h1>
-<p>This section demonstrate that how to measure the power consumption base on <code>tcp_demo</code> example.</p>
+                <h1 id="power-measure">Power Measure</h1>
+<p>The OPL series chips provide power-saving functions to facilitate the development of more flexible and long-live IoT product.</p>
+<p>According to the development document <a href="https://github.com/Opulinks-Tech/Document/blob/master/SDK/en/OPL1000-Power-Consumption-Measurement-Guide_ENG.pdf">Power-Saving-Introduction</a>, OPL series chips provide the following power-saving types.</p>
 <ul>
-<li>linker to SDK file (Power-Saving-Introduction &amp; Power-Consumption-Measurement-Guide)</li>
+<li>Smart Sleep</li>
+<li>Timer Sleep</li>
+<li>Deep Sleep</li>
 </ul>
-<h2 id="power-mode-setting-from-quickdev_framework">Power mode (setting from QuickDev_Framework)</h2>
-<h3 id="power-mode-configure">Power mode configure</h3>
-<h6 id="low-power-mode">Low-power mode</h6>
-<h6 id="balance-mode">Balance mode</h6>
-<h6 id="performance-mode">Performance mode</h6>
+<p>Due to the purpose of fast development, the QuickDev-Framework provides a mechanism called <a href="#power-mode">Power Mode</a> which is based on Smart Sleep. Developer just set the power mode to configure the product as low-power / balance / performance device.</p>
+<p>The following setions descript the mechanism and demonstrate the power measure base on <code>TCP_demo</code> example.</p>
+<h2 id="power-mode">Power Mode</h2>
+<p>As mentioned in section <a href="project_config.html#system-configuration">System Configuration</a>, QuickDev-Framework provides a power mode selection for different application scenarios.</p>
+<p>There're 4 types selection that the user can select for different application / product type.</p>
+<ul>
+<li>Low-Power Mode</li>
+<li>Balance Mode</li>
+<li>Performance Mode</li>
+<li>User Define</li>
+</ul>
+<p>There are different configurations in each power mode selection, as defined by following parameters.</p>
+<ul>
+<li><code>PS_ENABLED</code> - Smart Sleep enable</li>
+<li><code>PS_MAC_LAY_ENABLED</code> - Wi-Fi MAC layer power save enable</li>
+<li><code>WM_DTIM_PERIOD_TIME</code> - DTIM period time</li>
+<li><code>WM_AC_RETRY_INTVL_TBL</code> - Wi-Fi auto-connect interval table</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The configure of <strong>Low-Power Mode</strong>, <strong>Balance Mode</strong> and <strong>Performance Mode</strong> had been set as a default setup defined in header files located at <code>quick_dev/common/config/ps_config</code>.</p>
+</div>
+<hr />
+<h3 id="low-power-mode">Low-Power Mode</h3>
+<p>The low-power mode configured for a low power consumption and long-live product type, it will be configured as a longer Skip DTIM period, and longer auto-connect interval for decreaseing core wakeup period for saving more power.</p>
+<p>To using this type, please configure the selection as following value in <code>qd_config.h</code>.</p>
+<pre><code class="language-c">#ifndef SYS_CFG_PS_MODE
+#define SYS_CFG_PS_MODE                         (0)
+#endif
+</code></pre>
+<h4 id="configuration">Configuration</h4>
+<h6 id="header-file-">Header file -</h6>
+<p>quick_dev/common/config/ps_config/ps_config_lp.h</p>
+<h6 id="defines-">Defines -</h6>
+<pre><code class="language-c">// &lt;o&gt; PS_ENABLED - smart sleep enable
+#ifndef PS_ENABLED
+#define PS_ENABLED                              (1)
+#endif
+
+// &lt;o&gt; PS_MAC_LAY_ENABLED - mac layer sleep after got ip
+#ifndef PS_MAC_LAY_ENABLED
+#define PS_MAC_LAY_ENABLED                      (1)
+#endif
+
+// &lt;o&gt; WM_DTIM_PERIOD_TIME
+#ifndef WM_DTIM_PERIOD_TIME
+#define WM_DTIM_PERIOD_TIME                     (3000)
+#endif
+
+// &lt;o&gt; WM_AC_RETRY_INTVL_TBL - auto-connect in wifi manager retry interval table (ms)
+// &lt;i&gt; modify below array to fit with your needs
+#ifndef WM_AC_RETRY_INTVL_TBL
+
+static uint32_t g_u32WmAcRetryIntvlTbl[5] =
+{
+    30000,
+    30000,
+    60000,
+    60000,
+    900000,
+};
+
+#define WM_AC_RETRY_INTVL_TBL                   (g_u32WmAcRetryIntvlTbl)
+#endif
+</code></pre>
+<hr />
+<h3 id="balance-mode">Balance Mode</h3>
+<p>The balance mode configured for a large battery or a power-line with power supply types product, it would more care about the shorter Skip DTIM period and auto-connect interval, but also had a smart sleep activate on your application.</p>
+<p>To using this type, please configure the selection as following value in <code>qd_config.h</code>.</p>
+<pre><code class="language-c">#ifndef SYS_CFG_PS_MODE
+#define SYS_CFG_PS_MODE                         (1)
+#endif
+</code></pre>
+<h4 id="configuration_1">Configuration</h4>
+<h6 id="header-file-_1">Header file -</h6>
+<p>quick_dev/common/config/ps_config/ps_config_bl.h</p>
+<h6 id="defines-_1">Defines -</h6>
+<pre><code class="language-c">// &lt;o&gt; PS_ENABLED - smart sleep enable
+#ifndef PS_ENABLED
+#define PS_ENABLED                              (1)
+#endif
+
+// &lt;o&gt; PS_MAC_LAY_ENABLED - mac layer sleep after got ip
+#ifndef PS_MAC_LAY_ENABLED
+#define PS_MAC_LAY_ENABLED                      (1)
+#endif
+
+// &lt;o&gt; WM_DTIM_PERIOD_TIME
+#ifndef WM_DTIM_PERIOD_TIME
+#define WM_DTIM_PERIOD_TIME                     (1000)
+#endif
+
+// &lt;o&gt; WM_AC_RETRY_INTVL_TBL - auto-connect in wifi manager retry interval table (ms)
+// &lt;i&gt; modify below array to fit with your needs
+#ifndef WM_AC_RETRY_INTVL_TBL
+
+static uint32_t g_u32WmAcRetryIntvlTbl[5] =
+{
+    30000,
+    30000,
+    30000,
+    60000,
+    60000,
+};
+
+#define WM_AC_RETRY_INTVL_TBL                   (g_u32WmAcRetryIntvlTbl)
+#endif
+</code></pre>
+<hr />
+<h3 id="performance-mode">Performance Mode</h3>
+<p>The performance mode configured for power-line with power supply type product, in this type selection the smart sleep will no-longer been activate, it will have a quick and better response of chip.</p>
+<p>To using this type, please configure the selection as following value in <code>qd_config.h</code>.</p>
+<pre><code class="language-c">#ifndef SYS_CFG_PS_MODE
+#define SYS_CFG_PS_MODE                         (2)
+#endif
+</code></pre>
+<h4 id="configuration_2">Configuration</h4>
+<h6 id="header-file-_2">Header file -</h6>
+<p>quick_dev/common/config/ps_config/ps_config_pf.h</p>
+<h6 id="defines-_2">Defines -</h6>
+<pre><code class="language-c">// &lt;o&gt; PS_ENABLED - smart sleep enable
+#ifndef PS_ENABLED
+#define PS_ENABLED                              (0)
+#endif
+
+// &lt;o&gt; PS_MAC_LAY_ENABLED - mac layer sleep after got ip
+#ifndef PS_MAC_LAY_ENABLED
+#define PS_MAC_LAY_ENABLED                      (0)
+#endif
+
+// &lt;o&gt; WM_DTIM_PERIOD_TIME
+#ifndef WM_DTIM_PERIOD_TIME
+#define WM_DTIM_PERIOD_TIME                     (1000)
+#endif
+
+// &lt;o&gt; WM_AC_RETRY_INTVL_TBL - auto-connect in wifi manager retry interval table (ms)
+// &lt;i&gt; modify below array to fit with your needs
+#ifndef WM_AC_RETRY_INTVL_TBL
+
+static uint32_t g_u32WmAcRetryIntvlTbl[5] =
+{
+    5000,
+    5000,
+    5000,
+    10000,
+    10000,
+};
+
+#define WM_AC_RETRY_INTVL_TBL                   (g_u32WmAcRetryIntvlTbl)
+#endif
+</code></pre>
+<hr />
+<h3 id="user-define">User Define</h3>
+<p>The user-define mode is reserved for developer to configure all the setting items for customized application / product.</p>
+<p>To using this type, please configure the selection as following value in <code>qd_config.h</code>.</p>
+<pre><code class="language-c">#ifndef SYS_CFG_PS_MODE
+#define SYS_CFG_PS_MODE                         (3) // or more then 3
+#endif
+</code></pre>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The user-define configuration is below the <code>SYS_CFG_PS_MODE</code> in <code>qd_config.h</code> .</p>
+</div>
+<hr />
 <h2 id="measuring-current-consumption">Measuring current consumption</h2>
-<h3 id="measure-on-evb">Measure on EVB</h3>
-<h3 id="_1"></h3>
+<p>This section demonstrate the steps that how to measure the power consumption on Dev-Kit base on <code>TCP_demo</code>.</p>
+<p>Before to check on following document, it's recommend to see the Dev-Kit HDK document to understand the hardware of Dev-Kit.</p>
+<ul>
+<li>OPL1600-A3 Dev-Kit HDK : <a href="https://github.com/Opulinks-Tech/OPL1000-HDK">https://github.com/Opulinks-Tech/OPL1000-HDK</a></li>
+<li>OPL2500-A0 Dev-Kit HDK : <a href="https://github.com/Opulinks-Tech/OPL2500A0-HDK">https://github.com/Opulinks-Tech/OPL2500A0-HDK</a></li>
+</ul>
+<h3 id="wiring-the-dev-kit">Wiring the Dev-Kit</h3>
+<p>On measuring the power consumption, in below diagram shows how to wried the Dev-Kit with your power monitor / power meter, the focusing to setup the Dev-Kit is set the jumper to short the <code>BAT</code> pin and common pin at middle.</p>
+<ul>
+<li>This diagram present the connection with power monitor (supply function included).</li>
+</ul>
+<p align="left"><img src="./img/pwr_measure_pwr_monitor.png"></p>
+
+<hr />
+<ul>
+<li>This diagram present the connection with power meter.</li>
+</ul>
+<p align="left"><img src="./img/pwr_measure_pwr_meter.png"></p>
+
+<h3 id="measure-with-tcp-demo-example">Measure with TCP demo example</h3>
+<p>Please check on <a href="../examples/cloud_example.html#tcp-demo">TCP demo</a> for more detail of this example.</p>
+<p>In following try out will guide you to measure the consumption in different situation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before we go, we must set the <a href="#power-mode">Power Mode</a> as <a href="#low-power-mode">Low-Power Mode</a> to enable the Smart Sleep.</p>
+</div>
+<h6 id="situation-1-periodic-post-and-keep-alive">Situation 1: Periodic post and keep-alive</h6>
+<p>Switch on the periodic data post and set as 20 sec period time at <code>qd_config.h</code> in <code>tcp_demo</code> example.</p>
+<pre><code class="language-c">// &lt;o&gt; TCP_DEMO_PERI_POST_EN - enable periodic post data
+#ifndef TCP_DEMO_PERI_POST_EN
+#define TCP_DEMO_PERI_POST_EN                   (1)
+#endif
+
+// &lt;o&gt; TCP_DEMO_PERI_POST_INTERVAL - periodic post data interval time (ms)
+#ifndef TCP_DEMO_PERI_POST_INTERVAL
+#define TCP_DEMO_PERI_POST_INTERVAL             (20000)
+#endif
+</code></pre>
+<p>Set keep-alive interval as 120 sec at <code>cloud_config.h</code> locate in <code>quick_dev/app_ref/cloud/tcp_cloud</code>.</p>
+<pre><code class="language-c">// keep alive time : set 0 will disable the keep alive behavior
+#ifndef CLOUD_KEEP_ALIVE_TIME
+#define CLOUD_KEEP_ALIVE_TIME                           (120000) //ms
+#endif
+</code></pre>
+<p>Then save and compiler the code, and download the binary into the device. After finish, open the TCP server with local network on your PC, the device will connect to server while the Network Up event indicate.</p>
+<p>When connected, the device will start periodic posting data to server and also trigger keep-alive message every 120 sec.</p>
+<p>In following screenshot, the consumption result of test arround 25min is near 0.16~0.18mA avg. in periodic data post and keep alive.</p>
+<p align="left"><img src="./img/pwr_measure_tcp_demo_peri_post_keep_alive.png"></p>
+
+<h6 id="situation-2-only-keep-alive">Situation 2: Only keep-alive</h6>
+<p>Base on situation 1 and only switch off the periodic data post at <code>qd_config.h</code> in <code>tcp_demo</code> example.</p>
+<pre><code class="language-c">// &lt;o&gt; TCP_DEMO_PERI_POST_EN - enable periodic post data
+#ifndef TCP_DEMO_PERI_POST_EN
+#define TCP_DEMO_PERI_POST_EN                   (0)
+#endif
+</code></pre>
+<p>Follow the steps after the code changed at situation 1.</p>
+<p>When connected, the device will only trigger keep-alive message every 120 sec.</p>
+<p>In following screenshot, the consumption result of test arround 25min is near 0.11~0.13mA avg. in only keep alive.</p>
+<p align="left"><img src="./img/pwr_measure_tcp_demo_keep_alive.png"></p>
+
+<h6 id="situation-3-idle">Situation 3: Idle</h6>
+<p>Base on situation 2, we had close the periodic data post, now we try to disable the keep-alive interval to make the device only in TCP connected status but without any behavior.</p>
+<p>Set the keep-alive interval time as 0 to disable the keep-alive function at <code>cloud_config.h</code> locate in <code>quick_dev/app_ref/cloud/tcp_cloud</code>.</p>
+<pre><code class="language-c">// keep alive time : set 0 will disable the keep alive behavior
+#ifndef CLOUD_KEEP_ALIVE_TIME
+#define CLOUD_KEEP_ALIVE_TIME                           (0) //ms
+#endif
+</code></pre>
+<p>Follow the steps after the code changed at situation 1.</p>
+<p>When connected, the device won't take any behavior and stay at idle status.</p>
+<p>In following screenshot, the consumption result of test arround 25min is near 0.09~0.10mA avg. in idle without any activity.</p>
+<p align="left"><img src="./img/pwr_measure_tcp_demo_idle.png"></p>
+
+<p>On top situations, we'll get different average power consumption, and now on you can get the current by measuring in different examples or your application.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="project_config.html" class="btn btn-neutral float-left" title="Project Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="log_config.html" class="btn btn-neutral float-right" title="Log Configuration">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -156,6 +442,10 @@
         </span>
     
     
+      <span><a href="project_config.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="log_config.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

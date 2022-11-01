@@ -51,9 +51,11 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="project_config.html">Project Configuration</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="pwr_measure.html">Power Measure</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="log_config.html">Log Configuration</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="wifi.html">WI-Fi</a>
+                  <li class="toctree-l1"><a class="reference internal" href="wifi.html">WI-FI</a>
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="ble.html">BluetoothLE</a>
     <ul class="current">
@@ -76,8 +78,6 @@
         </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#unsolicited-callback">Unsolicited callback</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#register-service">Register service</a>
     </li>
         </ul>
     </li>
@@ -115,6 +115,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../examples/wifi_example.html">WI-FI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../examples/host_mode_example.html">Host_Mode</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/ota_example.html">OTA</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
@@ -307,8 +309,11 @@ it's for developer to fill the ble related init function in it.</p>
 <p class="admonition-title">Info</p>
 <p>Unsolicited callback prototype located in <code>ble_mngr_api.h</code></p>
 </div>
-<h3 id="register-service">Register service</h3>
-<p>Descript how to create the service file</p>
+<!-- ### Register service
+
+Descript how to create the service file -->
+
+<hr />
 <h2 id="how-to">How To...</h2>
 <h3 id="ble-manager_1">BLE Manager</h3>
 <p>The BLE manager should provide a mechanism for user BLE data processing application to register the user (vendor defined) service table. The user data processing application process the data receive from and transmit to the phone App via BLE. Developer could set a file for specific service in <code>quick_dev\ble_services</code></p>
@@ -527,7 +532,7 @@ typedef struct
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="wifi.html" class="btn btn-neutral float-left" title="WI-Fi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="wifi.html" class="btn btn-neutral float-left" title="WI-FI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="wifi_provision_via_ble.html" class="btn btn-neutral float-right" title="WI-FI Provision Via BLE">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 

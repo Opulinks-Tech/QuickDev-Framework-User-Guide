@@ -51,9 +51,11 @@
               <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="project_config.html">Project Configuration</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="pwr_measure.html">Power Measure</a>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="log_config.html">Log Configuration</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="wifi.html">WI-Fi</a>
+                  <li class="toctree-l1"><a class="reference internal" href="wifi.html">WI-FI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="ble.html">BluetoothLE</a>
                   </li>
@@ -101,6 +103,8 @@
                   <li class="toctree-l1"><a class="reference internal" href="../examples/wifi_example.html">WI-FI</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../examples/host_mode_example.html">Host_Mode</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../examples/ota_example.html">OTA</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">API Reference</span></p>
@@ -159,7 +163,7 @@
 
 <p>When the phone (BLE central) wants to provision the Wi-Fi credential and connect to AP, the phone (BLE central) will send the command and required message to the device, e.g. Wi-Fi scan request or Wi-Fi connect request.</p>
 <p>And the device is responsible to receive and parsing the required message, then progress the Network manager to processing according to different events.</p>
-<p>While Network manager had done with indicate or unsolicited callback returns, then the device will transit the corresponding response or result to the the phone (BLE central) for notify the status.</p>
+<p>While Network manager had done with indicate or unsolicited callback returns, then the device will transit the corresponding response or result to the phone (BLE central) for notify the status.</p>
 <p>The focusing of provision process is to create a BLE data command list to letting the phone (BLE central) and the device can recognize the data and handling in such.</p>
 <h3 id="opl-service">OPL Service</h3>
 <p>OPL service is one of the profile service collection in BLE which designed by Opulinks that including the Wi-Fi provision command &amp; handler needed.</p>
@@ -234,7 +238,7 @@
     OPL_DataRecvHandler(pData, (uint16_t)u32DataLen);
 }
 </code></pre>
-<p>At final steps, we must enable the protocol definition in `qd_module.h"</p>
+<p>At final step, we must enable the protocol which defined in `qd_module.h"</p>
 <pre><code class="language-c">//==========================================================
 // &lt;h&gt; OPL Data protocol
 //==========================================================
@@ -246,6 +250,7 @@
 #endif
 </code></pre>
 <p>And that's the wrap, the Wi-Fi provision via BLE function has been activated in your application. It's recommend to using our standard phone APP by searching "Opulinks Wireless Utilities" at APP store to try with.</p>
+<hr />
 <h2 id="how-to">How to...</h2>
 <h3 id="how-to-create-an-user-defined-service-eg-quick_devapp_refble_data_protopl_svcc-in-ble-manager">How to create an user defined service (e.g. <code>quick_dev\app_ref\ble_data_prot\opl_svc.c</code>) in BLE Manager</h3>
 <p>Please refer to <a href="ble.html">BluetoothLE</a></p>

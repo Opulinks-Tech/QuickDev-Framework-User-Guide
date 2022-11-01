@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>OTA - Quick-DEV Programming Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "OTA";
+        var mkdocs_page_input_path = "examples\\ota_example.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Quick-DEV Programming Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Quick-DEV FWK</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../get_started/get_started.html">Get Started</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Application Guide</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/project_config.html">Project Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/pwr_measure.html">Power Measure</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/log_config.html">Log Configuration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/wifi.html">WI-FI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/ble.html">BluetoothLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/wifi_provision_via_ble.html">WI-FI Provision Via BLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/cloud.html">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../application-guide/ota.html">OTA</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="ble_example.html">BLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="cloud_example.html">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="qd_app_example.html">Start Up</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="wifi_example.html">WI-FI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="host_mode_example.html">Host_Mode</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="ota_example.html">OTA</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#http-ota">HTTP OTA</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#http-file-server">HTTP File Server</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#device-setting">Device Setting</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#step1-build-project">Step1. Build project</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step2-download-firmware">Step2. Download firmware</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step3-wi-fi-provision-via-ble">Step3. Wi-Fi provision via BLE</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step4-add-binary-file-to-http-file-server">Step4. Add binary file to HTTP File Server</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#step5-issue-at-command-to-start-ota">Step5. Issue AT command to start OTA.</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ble-ota">BLE OTA</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/wifi_apis.html">WI-FI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/ble_apis.html">BluetoothLE</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/cloud_apis.html">Cloud</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/ota_apis.html">OTA</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../api-reference/opl_error_code.html">OPL Error Code</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Quick-DEV Programming Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+          <li>Examples &raquo;</li>
+      <li>OTA</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/examples/ota_example.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="ota-examples">OTA examples</h1>
+<p>OTA (Over-The-Air) examples are intended to demonstrate the firmware upgrade over the air base on different application layer protocol, and the examples all using AT command to triggering OTA process.</p>
+<p>To understand the OTA mechanism, please check on <a href="../application-guide/ota.html">OTA</a> section in appplication-guide.</p>
+<h2 id="http-ota">HTTP OTA</h2>
+<p>HTTP OTA example provides the OTA demonstration on HTTP protocol, the user can issue the AT command <code>at+ota</code> with URL to trigger the upgrade, and the application will begin to download the firmware from a given URL of HTTP file server, and will reboot the system after it's done.</p>
+<p>HTTP OTA example located at <code>/example/ota/http_ota</code></p>
+<p>Before start this try out, we're recommend to wire the <code>Debug port</code> and <code>UART1 port</code> to your PC at same time, the connection of wire shows at <a href="ota_example.html#device-setting">Device Setting</a>. In cause of two connection, the developer must issue the AT command in this example, and also need to check the printed log of OTA status at same time, so wired two UART port can easy to check at immediate.</p>
+<p>About the mechanism of HTTP OTA, when the user issue AT command to trigger firmware upgrade, the OTA task handler will receive OTA request from application. After receiving request the OTA task handler will connect to http file server and download binary file. It will also trigger OTA manager to write data to flash. After OTA manager finish write data to flash, it will restart the system to finish the upgrade of your firmware.</p>
+<h3 id="setup">Setup</h3>
+<h6 id="http-file-server">HTTP File Server</h6>
+<p>The HFS is a free application from <a href="http://rejetto.com/">rejetto.com</a> that can easily to generate the HTTP file server on your PC. In this example we will use this tool to set the upgradable firmware and it will create a given link for AT command we will issue.</p>
+<ul>
+<li>HTTP File Server: <a href="https://www.rejetto.com/hfs/?f=dl">https://www.rejetto.com/hfs/?f=dl</a>  </li>
+</ul>
+<p>The binary file should be added to HTTP file server, and then the user can start OTA, and download the binary file on HTTP file server.</p>
+<p><img alt="http_file_server" src="img/http_file_server.png" /></p>
+<h6 id="device-setting">Device Setting</h6>
+<p>This diagram shows how to wire two UART serial port at the same time.</p>
+<p><img alt="http_device_setting" src="img/http_ota_device_setting.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="left">GPIO</th>
+<th align="left">Function</th>
+<th align="left">Default Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">IO8</td>
+<td align="left">UART1 TX</td>
+<td align="left">AT</td>
+</tr>
+<tr>
+<td align="left">IO9</td>
+<td align="left">UART1 RX</td>
+<td align="left">AT</td>
+</tr>
+<tr>
+<td align="left">IO1</td>
+<td align="left">DEBUG RX</td>
+<td align="left">DEBUG</td>
+</tr>
+<tr>
+<td align="left">IO0</td>
+<td align="left">DEBUG TX</td>
+<td align="left">DEBUG</td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing">Testing</h3>
+<h6 id="step1-build-project">Step1. Build project</h6>
+<p>Click Build and Rebuild button to compiler project.
+Output file <code>&lt;Project name&gt;.bin</code> located at <code>&lt;Project root&gt;/Output/Object</code> .  </p>
+<p>You can follow <a href="../get_started/get_started.html#step-5-build-project">Step5</a> section in Get started to build the project.</p>
+<h6 id="step2-download-firmware">Step2. Download firmware</h6>
+<p>You can follow <a href="../get_started/get_started.html#step-6-download-firmware">Step6</a> section in Get started to download firmware.</p>
+<p>Pay attention to <code>OTA</code> tag. Because we need to execute "HTTP OTA" process, it is important to set <code>OTA Header Setting</code>:  </p>
+<ol>
+<li>Product ID -&gt; select to the target chip series ID.  </li>
+<li>Chip ID -&gt; select to the target chip ID.  </li>
+<li>Firmware ID -&gt; number of current project version.  </li>
+<li>Checksum -&gt; It will auto-calculated.  </li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The developer can generate two binary files with different <strong>Firmware ID</strong> or add some log in program to easily check whether the upgrade is successful or not.</p>
+</div>
+<p><img alt="http_ota_step2" src="img/http_ota_step2.png" /></p>
+<h6 id="step3-wi-fi-provision-via-ble">Step3. Wi-Fi provision via BLE</h6>
+<p>HTTP OTA example download binary file from HTTP file server so the user must need to set the same AP with HTTP file server.  </p>
+<p>You can follow <a href="qd_app_example.html">Wi-Fi provision via BLE</a> section in Start Up examples to set the same AP.</p>
+<h6 id="step4-add-binary-file-to-http-file-server">Step4. Add binary file to HTTP File Server</h6>
+<p>Add binary file to HTTP File Server.</p>
+<p>The binary file is located at <code>sdk/Tool/Download/Patch/&lt;project name&gt;.bin</code> .</p>
+<p><img alt="http_ota_step2" src="img/http_ota_step3_1.png" />  </p>
+<p><img alt="http_ota_step2" src="img/http_ota_step3_2.png" />  </p>
+<p>After adding binary file to server, an url will be generated, the user can copy this url (ex:http://190.168.1.52/op1000_ota.bin) and follow next step.  </p>
+<h6 id="step5-issue-at-command-to-start-ota">Step5. Issue AT command to start OTA.</h6>
+<p>Open two terminals (such as Tera-Term application), one is DBG mode and another is AT mode. DBG mode is to check the message and AT mode is to issue AT command. </p>
+<p>The user can issue AT command <code>at+OTA=http://&lt;IP address&gt;/&lt;firmware name&gt;.bin</code> to start OTA.</p>
+<p><img alt="http_ota_step5_1" src="img/http_ota_step5_1.png" /></p>
+<p>If the user success to start OTA, you will get "OTA start" on the terminal of DBG console like the below figure.</p>
+<p><img alt="http_ota_step5_2" src="img/http_ota_step5_2.png" /></p>
+<p>After finishing OTA process, The "download success" and "OTA finish" messages will show in DBG console of the terminal window.  </p>
+<p><img alt="http_ota_step5_3" src="img/http_ota_step5_3.png" /></p>
+<hr />
+<h2 id="ble-ota">BLE OTA</h2>
+<p>Please refer to <a href="qd_app_example.html#wi-fi-provision-via-ble">Wi-Fi provision via BLE</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="host_mode_example.html" class="btn btn-neutral float-left" title="Host_Mode"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../api-reference/wifi_apis.html" class="btn btn-neutral float-right" title="WI-FI">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright 2022, Opulinks cooperation</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="host_mode_example.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../api-reference/wifi_apis.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
