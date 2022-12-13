@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Board Configuration - Quick-DEV Programming Guide</title>
+    <title>XIP (Execute In Place) - Quick-DEV Programming Guide</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Board Configuration";
-        var mkdocs_page_input_path = "application-guide\\board_config.md";
+        var mkdocs_page_name = "XIP (Execute In Place)";
+        var mkdocs_page_input_path = "application-guide\\xip.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -48,7 +48,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Application Guide</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="project_config.html">Project Configuration</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="pwr_measure.html">Power Measure</a>
@@ -65,7 +65,21 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="ota.html">OTA</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="xip.html">XIP (Execute In Place)</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="xip.html">XIP (Execute In Place)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#scatter-file-setting">Scatter File Setting</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#enable-xip-function">Enable XIP function</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-xip-tag">Using XIP Tag</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#building-program">Building Program</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pack-with-binary">Pack With Binary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#xip-in-external-flash">XIP in External Flash</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
@@ -110,9 +124,10 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Board Configuration</li>
+          <li>Application Guide &raquo;</li>
+      <li>XIP (Execute In Place)</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/board_config.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/Opulinks-Tech/QuickDev-Framework/edit/master/docs/application-guide/xip.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -120,11 +135,80 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="board-configuration">Board Configuration</h1>
-<p>Descript</p>
+                <h1 id="xip-execute-in-place">XIP (Execute In Place)</h1>
+<p>XIP is a method of executing programs directly from long-term storage rather than copying into RAM. It's an exetension of using shared memory to reduce the total amount of memory required. It's general effect is that the program text consumes no writable memory, saving it for dynamic data, and that all instance of the program are run from a single copy.</p>
+<p>In the following guidience which base on <code>&lt;SDK base&gt;/APS_PATCH/examples/get_started/XIP</code> example project located in sdk in QuickDev Framework.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>XIP function <strong>ONLY SUPPORTED ON OPL2500</strong>. If you can't find the <code>XIP</code> example, please make sure the sdk source was download from <a href="https://github.com/Opulinks-Tech/OPL2500A0-SDK">https://github.com/Opulinks-Tech/OPL2500A0-SDK</a>.</p>
+</div>
+<h2 id="scatter-file-setting">Scatter File Setting</h2>
+<p>In <code>XIP</code> example has a scatter file name <code>opl2500_app_aps.sct</code>, this file declare some definition and memory scatter for project.</p>
+<p>The following diagram presents which defines and memory scatter are belongs to XIP.</p>
+<p align="center"><img src="./img/xip_project_sct_file.png"></p>
+
+<h2 id="enable-xip-function">Enable XIP function</h2>
+<p>Then we also need declare the global defined <code>OPL2500_XIP</code> for the project to enable XIP function.</p>
+<p align="center"><img src="./img/xip_project_global_define.png"></p>
+
+<h2 id="using-xip-tag">Using XIP Tag</h2>
+<p>When the scatter file and the global define are all sets, then you can now using the attribute tags like following items in your program.</p>
+<ul>
+<li><strong>XIP_TEXT</strong> - tag for TEXT</li>
+<li><strong>XIP_RODATA</strong> - tag for Read-Only DATA</li>
+</ul>
+<p>Please refer to <code>main_patch.c</code> file in <code>XIP</code> example for the demonstration to using XIP tags.</p>
+<pre><code class="language-c">// #line.74
+
+// Sec 4: declaration of global variable
+XIP_RODATA const uint8_t g_u8RoData[DEMO_XIP_RODATA_LEN] = {
+    0x22, 0x7D, 0xD2, 0x08, 0xB4, 0xF5, 0x5D, 0x56, 0x8C, 0xDF, 0x88, 0x52, 0x26, 0xF3, 0xD6, 0x52, 
+    0x75, 0x34, 0x5C, 0xBA, 0x46, 0x60, 0x22, 0xEA, 0x50, 0xE1, 0x2E, 0x72, 0x44, 0xD6, 0xFE, 0xF1, 
+    0x0E, 0x5E, 0x0B, 0xD1, 0x37, 0xFA, 0xF9, 0x0D, 0x0C, 0xAE, 0x8D, 0xE5, 0xC7, 0x67, 0x3C, 0xBD, 
+    0x97, 0x56, 0x71, 0xA8, 0xDD, 0xC7, 0x21, 0xC2, 0x5F, 0x1E, 0xAE, 0x7D, 0x2E, 0x05, 0x9B, 0x2F, 
+    0xA7, 0x80, 0x44, 0x42, 0x24, 0x26, 0xC5, 0xC8, 0x86, 0xBA, 0x91, 0x26, 0xD4, 0xE3, 0xED, 0xAC, 
+    0xD4, 0xBD, 0x24, 0xA6, 0x2C, 0x14, 0x55, 0x5F, 0x69, 0x47, 0x5E, 0x0C, 0x4E, 0xC5, 0x17, 0x65, 
+    0xB2, 0xDA, 0x7A, 0x55, 0x28, 0x18, 0x81, 0x19, 0x09, 0x11, 0x0F, 0xE9, 0x93, 0x3E, 0xEA, 0x75, 
+    0x35, 0x2A, 0x79, 0xC2, 0x86, 0xC2, 0x75, 0xD7, 0xBF, 0x1B, 0x36, 0xFF, 0x29, 0xE8, 0x4A, 0x13
+};
+</code></pre>
+<pre><code class="language-c">// #line.313
+
+XIP_TEXT static void Main_AppInit_patch(void)
+{
+    osThreadDef_t tThreadDef;
+    osMessageQDef_t tMessageDef;
+    osPoolDef_t tMemPoolDef;
+    ...
+}
+</code></pre>
+<h2 id="building-program">Building Program</h2>
+<p>Click <code>Build</code> or <code>Rebuild</code> to compile the program.</p>
+<p>To understand how to activate the build, please refer to <a href="../get_started/get_started.html#step-5-build-project">Build project</a> section for more information.</p>
+<p>When the compile finish, system will generated two output file which located at <code>Output/Objects/opl2500_app_aps.bin</code> folder.</p>
+<ul>
+<li>RW_IRAM1_EntryPoint.bin - original application code</li>
+<li>XIP_ROM.bin - code with XIP tags </li>
+</ul>
+<p>The <code>XIP_ROM.bin</code> contents with TEXT and Read-Only DATA which been tags in program and will not copy to RAM during </p>
+<h2 id="pack-with-binary">Pack With Binary</h2>
+<p>According to <a href="../get_started/get_started.html#step-6-download-firmware">Download firmware</a> section mention, after generated the binary files, we should pack the binary file with M0 Bin base on Script file, and using the packed binary for the last binary file to download into the device.</p>
+<p>And for XIP project, <code>XIP_ROM.bin</code> now also required to pack into the last binary file to download. To do that, we <strong>MUST</strong> using a Script file which plus XIP. The name of the Script file is <code>PatchData_XIP.txt</code>.</p>
+<p align="center"><img src="./img/xip_patch_data_file.png"></p>
+
+<p>The screen-shot of <a href="https://github.com/NetlinkPmTeam/Tools/blob/main/Windows/DownloadTool/DownloadTool.zip">Download Tool</a> like following diagram.</p>
+<p align="center"><img src="./img/xip_download_tool.png"></p>
+
+<p>Then packed and download the last binary and verify the works.</p>
+<h2 id="xip-in-external-flash">XIP in External Flash</h2>
+<p>TBC..</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="ota.html" class="btn btn-neutral float-left" title="OTA"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../examples/ble_example.html" class="btn btn-neutral float-right" title="BLE">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -151,6 +235,10 @@
         </span>
     
     
+      <span><a href="ota.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../examples/ble_example.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
